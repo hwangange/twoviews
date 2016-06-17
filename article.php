@@ -1,4 +1,7 @@
-
+<?php
+	 $_SESSION["id"] = $_GET["id"];
+	 $session_id = $_SESSION["id"];
+?>
 <!DOCTYPE html>
 <html>
 	<?php require "head.php"; ?>
@@ -11,23 +14,7 @@
 
 	    	<div class = "row">
 	    		<div class = "col-md-9">
-	    			<h1>Article Title</h1>
-	    			<p><span>Author</span><span>	|	</span><span>Date</span></p>
-
-	    			<br>
-	    			<div class = "article-content">
-		    			<p>To create your first image blog post, click here and select 'Add & Edit Posts' > All Posts > This is the title of your first image post.Great looking images make your blog posts more visually compelling for your audience, and encourage readers to keep coming back. </p>
-
-		    			<br>
-
-		    			<p>To create your first image blog post, click here and select 'Add & Edit Posts' > All Posts > This is the title of your first image post.Great looking images make your blog posts more visually compelling for your audience, and encourage readers to keep coming back. </p>
-
-		    			<br>
-
-		    			<p>To create your first image blog post, click here and select 'Add & Edit Posts' > All Posts > This is the title of your first image post.Great looking images make your blog posts more visually compelling for your audience, and encourage readers to keep coming back. </p>
-		    		</div>
-
-
+	    			<?php require "database/get-article.php"; ?>
 	    		</div>
 	    		<div class = "article-sidebar col-md-3">
 	    			<h3 class = "article-sidebar-item">Recommended Reading</h3>

@@ -48,7 +48,7 @@
 						echo"
 							<div class = 'preview-article'>
 								<div class = 'genre' id = '$genreID'></div>
-			        			<h1>$title</h1>
+			        			<a href = 'article.php?id=$id'><h1>$title</h1></a>
 			        			<p><span>$author</span><span>	|	</span><span>$date</span></p>	
 			        			<br>
                          		<img class = 'preview-image' src = '$image'>

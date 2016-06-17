@@ -54,33 +54,6 @@
 
 	        <div class = "row">
 	        	<div class = "col-md-9">
-	        		<div class = "preview-article">
-	        			<div class = "genre genre-us">Genre</div>
-	        			<h1>Article Title</h1>
-	        			<p><span>Author</span><span>	|	</span><span>Date</span></p>
-	        			<div>
-		    				<p>To create your first image blog post, click here and select 'Add & Edit Posts' > All Posts > This is the title of your first image post.Great looking images make your blog posts more visually compelling for your audience, and encourage readers to keep coming back. </p>
-		    			</div>
-		    			<br>
-	        		</div>
-
-	        		<div class = "preview-article">
-	        			<h1>Article Title</h1>
-	        			<p><span>Author</span><span>	|	</span><span>Date</span></p>
-	        			<div>
-		    				<p>To create your first image blog post, click here and select 'Add & Edit Posts' > All Posts > This is the title of your first image post.Great looking images make your blog posts more visually compelling for your audience, and encourage readers to keep coming back. </p>
-		    			</div>
-		    			<br>
-	        		</div>
-
-	        		<div class = "preview-article">
-	        			<h1>Article Title</h1>
-	        			<p><span>Author</span><span>	|	</span><span>Date</span></p>
-	        			<div>
-		    				<p>To create your first image blog post, click here and select 'Add & Edit Posts' > All Posts > This is the title of your first image post.Great looking images make your blog posts more visually compelling for your audience, and encourage readers to keep coming back. </p>
-		    			</div>
-		    			<br>
-	        		</div>
 	        		<?php require 'database/get-home-articles.php'; ?>
 	        	</div>
 
