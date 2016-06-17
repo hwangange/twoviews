@@ -13,3 +13,92 @@ body {
 footer {
     margin: 50px 0;
 }
+
+/*********GENRE DIV COLORS ****************/
+.genre {
+	color: white;
+	font-weight: bold;
+	display: inline;
+	padding-right: 15px;
+  	padding-left: 15px;
+}
+
+.genre-us {
+	background-color: red;
+}
+
+.genre-viral {
+	background-color: black;
+}
+
+.genre-international {
+	background-color: green;
+}
+
+.genre-science {
+	background-color: blue;
+}
+
+.genre-entertainment {
+	background-color: pink;
+}
+
+.genre-school {
+	background-color: purple;
+}
+
+.genre-life {
+	background-color: orange;
+}
+
+.genre-editorial {
+	color: black;
+	background-color: yellow;
+}
+
+/*****HOME PAGE**************/
+.top-post-row {
+	padding: 25px;
+}
+
+
+.preview-image {
+	max-width: 600px;
+	max-height: 400px;
+	width: auto;
+	height: auto;
+	display: block;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+
+@media(max-width : 480px) {
+	.preview-image {
+		max-width: 480px;
+	}    
+}
+@media (min-width: 768px) {
+  .preview-image {
+    max-width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .preview-image {
+    max-width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .preview-image {
+    max-width: 1170px;
+  }
+}
+
+
+
+
+/*****ARTICLE PAGE**********/
+.article-sidebar-item {
+	text-align: center;
+}
+
