@@ -42,8 +42,12 @@
 						    $stringCut = substr($string, 0, 500);
 
 						    // make sure it ends in a word so assassinate doesn't become ass...
-						    $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'<br><a href="index.php">Read More</a>'; 
+						    $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'<br><a href="article.php?id='.$id.'">Read More</a>'; 
 						}
+
+						$tags = str_replace(' ', '', $tags);
+						$tagArray = explode(',', $tags);
+
 
 						echo"
 							<div class = 'preview-article'>
@@ -55,7 +59,12 @@
                          		<br><br>
 			        			<div>
 				    				<p>$string</p>
-				    			</div>
+				    				<span>Tags: </span>";
+				    	foreach($tagArray as $tag) {
+				    		echo "<a href = 'tags.php?tag=$tag'><span>$tag</span></a>	";
+				    	}
+			        	echo "
+			        			</div>
 				    			<br>
 			        		</div>
 			        		<script>

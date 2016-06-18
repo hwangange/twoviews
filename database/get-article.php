@@ -37,6 +37,9 @@
 
 						$genre = strtoupper($genre);
 
+						$tags = str_replace(' ', '', $tags);
+						$tagArray = explode(',', $tags);
+
 						echo"
 
 							<div class = 'genre $genreClass' id = '$genreID'>$genre</div>
@@ -46,11 +49,17 @@
 	    					<img class = 'preview-image' src = '$image'>
 	    					<br><br>
 	    					<div id = 'article-text'>
-	    					</div>
 	    					<script>
 			        			var element = document.getElementById('article-text');
 			        			element.innerHTML += '$text'; 
-			        		</script>";
+			        		</script>
+			        		<br><br>
+			        		<span>Tags: </span>";
+				    	foreach($tagArray as $tag) {
+				    		echo "<a href = 'tags.php?tag=$tag'><span>$tag</span></a>	";
+				    	}
+			        	echo "
+							</div>";
 					}
 				} 
 
