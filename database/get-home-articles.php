@@ -50,30 +50,56 @@
 
 						$uppercase = ucfirst($genre);
 
+						if($count<6) {
+							echo"
+								<div class = 'preview-article'>
+									<a href = 'genre.php?genre=$uppercase'><div class = 'genre' id = '$genreID'></div></a>
+				        			<a href = 'article.php?id=$id'><h1>$title</h1></a>
+				        			<p><span>$author</span><span>	|	</span><span>$date</span></p>	
+				        			
+	                         		<img class = 'preview-image' src = '$image'>
+	                         		<br>
+				        			<div>
+					    				<p>$string</p>
+					    				<span>Tags: </span>";
+					    	foreach($tagArray as $tag) {
+					    		echo "<a href = 'tags.php?tag=$tag'><span>$tag</span></a>	";
+					    	}
+				        	echo "
+				        			</div>
+					    			<br>
+				        		</div>
+				        		<script>
+				        			var element = document.getElementById('$genreID');
+				        			element.className += ' genre-' + '$genre';
+				        			element.innerHTML += '$genre'.toUpperCase(); 
+				        		</script>";
+				        }
+				        $count+=1;
+				        if($count==6) { ?>
+				        			</div>
+					        	</div>
 
-						echo"
-							<div class = 'preview-article'>
-								<a href = 'genre.php?genre=$uppercase'><div class = 'genre' id = '$genreID'></div></a>
-			        			<a href = 'article.php?id=$id'><h1>$title</h1></a>
-			        			<p><span>$author</span><span>	|	</span><span>$date</span></p>	
-			        			
-                         		<img class = 'preview-image' src = '$image'>
-                         		<br>
-			        			<div>
-				    				<p>$string</p>
-				    				<span>Tags: </span>";
-				    	foreach($tagArray as $tag) {
-				    		echo "<a href = 'tags.php?tag=$tag'><span>$tag</span></a>	";
-				    	}
-			        	echo "
-			        			</div>
-				    			<br>
-			        		</div>
-			        		<script>
-			        			var element = document.getElementById('$genreID');
-			        			element.className += ' genre-' + '$genre';
-			        			element.innerHTML += '$genre'.toUpperCase(); 
-			        		</script>";
+					        	<div class = "col-md-3">
+					        		<h3 class = "article-sidebar-item">Who We Are</h3>
+					    			<hr class = "less-hr">
+					    			<img src = "img/two_views_logo.jpg" class = "centered">
+					    			<p>Two Views is a student run onling news service. We offer opinionated and sophisticated editorials, fresh perspectives on current events, and articles on the latest news.</p>
+
+					    			<h3 class = "article-sidebar-item">Search By Tags</h3>
+					    			<hr class = "less-hr">
+					    			<p>To create your first image blog post, click here and select 'Add & Edit Posts' > All Posts > This is the title of your first image post.Great looking images make your blog posts more visually compelling for your audience, and encourage readers to keep coming back. </p>
+
+					    			<a class="twitter-timeline" href="https://twitter.com/TwoViewsPress">Tweets by TwoViewsPress</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+					        	</div>
+					        </div>
+
+
+
+				     <?php   }
+				     	else if ($count > 6) {
+
+				     	}
 					}
 				} 
 
@@ -87,6 +113,12 @@
 		}
 
 	}
+?>
+
+<div class = "row">
+	<div class = "col-md-9">
+		<div id = "grid" data-columns>
+<?php
 
 	$home_articles = new home_articles();
 	$data = array();	

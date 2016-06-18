@@ -66,11 +66,16 @@ footer {
 
 #myCarousel img{
 	max-height: 300px;
-	width: auto;
-	height: auto;
+	width: 100%;
+/*	width: auto;
+	height: auto; */
 }
 
-div.inline {float: left;}
+.centered-and-cropped {
+	object-fit: cover;
+}
+
+.inline {float: left;}
 
 .preview-article h1{
 	margin-top: 5px;
@@ -131,16 +136,28 @@ div.inline {float: left;}
 
 
 /*****ARTICLE PAGE**********/
-.article-sidebar-item {
-	text-align: center;
+.less-hr {
+	margin: 0;
+	padding: 0;
+	margin-bottom: 2px;
 }
 
 /**********TAGS *********/
 .tag-img {
 	max-width: 200px;
-	max-height: 150px;
-	width: auto;
-	height: auto;
+}
+
+/*********STAFF*****/
+.person {
+	max-width: 200px;
+	border: 10px solid transparent;
+	margin-right: auto;
+	margin-left: auto;
+	display: block;
+}
+
+.staff h4, .staff p {
+	text-align: center;
 }
 
 

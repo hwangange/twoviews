@@ -8,7 +8,7 @@
 		<!-- Page Content -->
 	    <div class="container">
 
-	    	<h1>About Us</h1>
+	    	<h1 class = "hero-spacer">About Us</h1>
 	     
 
 
