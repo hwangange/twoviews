@@ -12,7 +12,7 @@
 		<!-- Page Content -->
 	    <div class="container">
 
-	    	<div class = "row">
+	    	<div class = "row hero-spacer">
 	    		<div class = "col-md-9">
 	    			<?php require "database/get-article.php"; ?>
 	    		</div>

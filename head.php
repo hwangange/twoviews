@@ -8,6 +8,9 @@
 
 
 	<script>
-	
+		$(function() {
+			$("div.tag-text").children().css("padding", "0px");
+			$("div.tag-text").children().css("margin", "0px");
+		});
 	</script>
 </head>

@@ -13,13 +13,12 @@
 		<!-- Page Content -->
 	    <div class="container">
 	    	<div class = "whole-top-post">
-		    	<h2 class = "hero-spacer">Top Posts</h2>
-		        <div class = "row top-post-row" style = "background-color: #9ac6c0">
+		        <div class = "row top-post-row hero-spacer">
 		        	<div class = "col-sm-4 col-md-3">
 		        		<div class = "thumbnail">
 		        			<img src = "img/blue.jpg">
 			        		<div class = "caption">
-			        			<h3>Title</h3>
+			        			Title
 			        		</div>
 			        	</div>
 			        </div>
@@ -27,7 +26,7 @@
 		        		<div class = "thumbnail">
 		        			<img src = "img/blue.jpg">
 			        		<div class = "caption">
-			        			<h3>Title</h3>
+			        			Title
 			        		</div>
 			        	</div>
 		        	</div>
@@ -35,7 +34,7 @@
 		        		<div class = "thumbnail">
 		        			<img src = "img/blue.jpg">
 			        		<div class = "caption">
-			        			<h3>Title</h3>
+			        			Title
 			        		</div>
 			        	</div>
 		        	</div>
@@ -43,7 +42,7 @@
 		        		<div class = "thumbnail">
 		        			<img src = "img/blue.jpg">
 			        		<div class = "caption">
-			        			<h3>Title</h3>
+			        			Title
 			        		</div>
 			        	</div>
 		        	</div>

@@ -1,7 +1,7 @@
 
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class = "container-fluid" style = "height: 75px; background-color: black" id = "header-top">
-            <h1 style = "text-align:center; color: white">TWO VIEWS</h1>
+            <a href = "index.php"><h1 style = "text-align:center; color: white">TWO VIEWS</h1></a>
         </div>
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -12,7 +12,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">Two Views</a>
+                <a class="navbar-brand" href="index.php">Two Views</a> 
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="myNav">
