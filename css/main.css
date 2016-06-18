@@ -14,6 +14,12 @@ footer {
     margin: 50px 0;
 }
 
+.centered {
+	margin-right: auto;
+	margin-left: auto;
+	display: block;
+}
+
 /*********GENRE DIV COLORS ****************/
 .genre {
 	color: white;
@@ -57,18 +63,27 @@ footer {
 }
 
 /*****HOME PAGE**************/
-.top-post-row {
-	padding: 25px;
+
+#myCarousel img{
+	max-height: 300px;
+	width: auto;
+	height: auto;
+}
+
+div.inline {float: left;}
+
+.preview-article h1{
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .preview-image {
-	max-width: 600px;
-	max-height: 400px;
+	max-width: 200px;
+	max-height: 150px;
 	width: auto;
 	height: auto;
 	display: block;
-	margin-left: auto;
-    margin-right: auto;
+
 }
 
 
@@ -109,7 +124,10 @@ footer {
   }
 }
 
-
+.social-row {
+	margin: auto;
+	text-align: center;
+}
 
 
 /*****ARTICLE PAGE**********/

@@ -13,7 +13,7 @@
 
 		public function find_articles(){
 
-				$query = "Select * from articles ORDER BY id DESC LIMIT 5";
+				$query = "Select * from articles ORDER BY id DESC LIMIT 6";
 				$result = mysqli_query($this->connection, $query);
 				if(mysqli_num_rows($result)==0){
 					$data = array('empty' => 'No results found.');
@@ -36,13 +36,13 @@
 
 						$string = strip_tags($text);
 
-						if (strlen($string) > 500) {
+						if (strlen($string) > 100) {
 
 						    // truncate string
-						    $stringCut = substr($string, 0, 500);
+						    $stringCut = substr($string, 0, 100);
 
 						    // make sure it ends in a word so assassinate doesn't become ass...
-						    $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'<br><a href="article.php?id='.$id.'">Read More</a>'; 
+						    $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'... <a href="article.php?id='.$id.'">Read More</a>'; 
 						}
 
 						$tags = str_replace(' ', '', $tags);
@@ -56,9 +56,9 @@
 								<a href = 'genre.php?genre=$uppercase'><div class = 'genre' id = '$genreID'></div></a>
 			        			<a href = 'article.php?id=$id'><h1>$title</h1></a>
 			        			<p><span>$author</span><span>	|	</span><span>$date</span></p>	
-			        			<br>
+			        			
                          		<img class = 'preview-image' src = '$image'>
-                         		<br><br>
+                         		<br>
 			        			<div>
 				    				<p>$string</p>
 				    				<span>Tags: </span>";
