@@ -77,8 +77,42 @@
 				        }
 				        $count+=1;
 				        if($count==6) { ?>
+				        			</div> <!-- end grid -->
+				        			<div class = "row">
+				        				<div class = "col-md-6 col-xs-12">
+				        					<div class = "media">
+					        					<div class = "media-left">
+					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
+					        					</div>
+					        					<div class = "media-body">
+					        						<h4 class = "media-heading">Media heading</h4>
+					        						<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text... </p>
+					        					</div>
+					        				</div>
+					        				<div class = "media">
+					        					<div class = "media-left">
+					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
+					        					</div>
+					        					<div class = "media-body">
+					        						<h4 class = "media-heading">Media heading</h4>
+					        						<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text... </p>
+					        					</div>
+					        				</div>
+					        				<div class = "media">
+					        					<div class = "media-left">
+					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
+					        					</div>
+					        					<div class = "media-body">
+					        						<h4 class = "media-heading">Media heading</h4>
+					        						<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text... </p>
+					        					</div>
+					        				</div>					        				
+				        				</div>
+				        				<div class = "col-md-6 col-xs-12">
+				        					<div><img src = "img/image1.jpg" class = "centered-and-cropped second-row-image"></div>        				
+				        				</div>
 				        			</div>
-					        	</div>
+					        	</div> <!-- end column -->
 
 					        	<div class = "col-md-3">
 					        		<h3 class = "article-sidebar-item">Who We Are</h3>
@@ -90,7 +124,7 @@
 					    			<hr class = "less-hr">
 					    			<p>To create your first image blog post, click here and select 'Add & Edit Posts' > All Posts > This is the title of your first image post.Great looking images make your blog posts more visually compelling for your audience, and encourage readers to keep coming back. </p>
 
-					    			<a class="twitter-timeline" href="https://twitter.com/TwoViewsPress">Tweets by TwoViewsPress</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+					    			<a class="twitter-timeline" data-height="500" data-theme="light" href="https://twitter.com/TwoViewsPress">Tweets by TwoViewsPress</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 					        	</div>
 					        </div>
 

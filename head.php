@@ -6,6 +6,8 @@
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/scroll.js"></script>
+	<script src="js/carousel.js"></script>
+	<script src="js/responsive.js"></script>
 	<script src="https://use.fonticons.com/291d889d.js"></script>
 
 

@@ -64,12 +64,50 @@ footer {
 
 /*****HOME PAGE**************/
 
+/**************CAROUSEL***************/
+
 #myCarousel img{
-	max-height: 300px;
+	max-height: 400px;
 	width: 100%;
 /*	width: auto;
 	height: auto; */
 }
+
+body { padding-top: 50px; }
+
+#myCarousel .carousel-caption {
+    left:0;
+	right:0;
+	bottom:0;
+	text-align:left;
+	padding:10px;
+	background:rgba(0,0,0,0.6);
+	text-shadow:none;
+}
+
+#myCarousel .list-group {
+	position:absolute;
+	top:0;
+	right:0;
+}
+#myCarousel .list-group-item {
+	border-radius:0px;
+	cursor:pointer;
+}
+#myCarousel .list-group .active {
+	background-color:#eee;	
+}
+
+@media (min-width: 992px) { 
+	#myCarousel {padding-right:33.3333%;}
+	#myCarousel .carousel-controls {display:none;} 	
+}
+@media (max-width: 991px) { 
+	.carousel-caption p,
+	#myCarousel .list-group {display:none;} 
+}
+
+/**************************************/
 
 .centered-and-cropped {
 	object-fit: cover;
@@ -91,6 +129,26 @@ footer {
 
 }
 
+.media-object {
+	max-height: 64px;
+	height: auto;
+	width: auto;
+}
+
+.second-row {
+	padding-top: 20px;
+}
+.second-row > div {
+	margin: 0;
+	padding: 0;
+}
+
+.second-row-image {
+	max-width: 100%;
+	width: auto;
+	height: auto;
+
+}
 
 @media(max-width : 480px) {
 	.preview-image {
@@ -104,6 +162,11 @@ footer {
 	#navbar-top {
 		display: none;
 	}    
+
+	.media-object {
+		display: none;
+	}
+
 }
 @media (min-width: 768px) {
   .preview-image {
@@ -117,6 +180,7 @@ footer {
 	#navbar-top {
 		display: block;
 	} 
+
 }
 @media (min-width: 992px) {
   .preview-image {
