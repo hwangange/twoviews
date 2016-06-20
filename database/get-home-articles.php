@@ -196,12 +196,7 @@
 				        			</div>
 					        	 <!-- end column -->
 
-					        	<div>
-					        		<h3 class = "article-sidebar-item">Who We Are</h3>
-					    			<hr class = "less-hr">
-					    			<img src = "img/two_views_logo.jpg" class = "centered">
-					    			<p>Two Views is a student run online news service. We offer opinionated and sophisticated editorials, fresh perspectives on current events, and articles on the latest news.</p>
-					        	</div>
+					        	
 					        
 
 

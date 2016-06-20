@@ -81,9 +81,10 @@
 
 	        <?php require 'database/get-home-articles.php'; ?>
 
-		<?php require 'footer.php'; ?>
+		
 	    </div>
 	    <!-- /.container -->
+	    <?php require 'footer.php'; ?>
 
 	</body>
 	<script src="js/salvattore.js"></script>

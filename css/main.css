@@ -279,4 +279,11 @@ body { padding-top: 50px; }
 	text-align: center;
 }
 
+/***************FOOTER**********/
+.footer {
+	background-color: black;
+	color: white;
+	margin: 0;
+	padding: 30px;
+}
 
