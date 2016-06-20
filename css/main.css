@@ -107,6 +107,35 @@ body { padding-top: 50px; }
 	#myCarousel .list-group {display:none;} 
 }
 
+/*************PRETTY BOXES *************/
+.pretty-box {
+	position: relative;
+	overflow: hidden;
+}
+
+.pretty-box > .hold-image{
+	position: relative;
+	z-index: 1;
+	opacity: .5;
+
+}
+
+.hold-image img {	
+	position: absolute;
+	content: "";
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%:
+	z-index: -1;
+	display: block;
+}
+
+.pretty-box a, .pretty-box div {
+	position: relative;
+	z-index: 2;
+}
+
 /**************************************/
 
 .centered-and-cropped {
@@ -130,10 +159,12 @@ body { padding-top: 50px; }
 }
 
 .media-object {
-	max-height: 64px;
-	height: auto;
-	width: auto;
+	height: 50px;
+	width: 50px;
+	object-fit: cover;
 }
+
+/*******************SECOND COLUMN**********/
 
 .second-row {
 	padding-top: 20px;
@@ -143,12 +174,36 @@ body { padding-top: 50px; }
 	padding: 0;
 }
 
-.second-row-image {
+.main-image {
 	max-width: 100%;
 	width: auto;
 	height: auto;
 
 }
+
+.main-image-padding {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.top-pad {
+	padding-top: 20px;
+}
+
+.big-pad {
+	padding: 30px;
+}
+
+.med-img-home {
+	max-width: 100%;
+	height: 150px;
+	object-fit: cover;
+	margin-right: auto;
+	margin-left: auto;
+
+}
+
+/*****************************/
 
 @media(max-width : 480px) {
 	.preview-image {

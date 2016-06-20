@@ -51,23 +51,19 @@
 						$uppercase = ucfirst($genre);
 
 						if($count<6) {
+							$imgUrl = "./img/image1.jpg";
 							echo"
-								<div class = 'preview-article'>
-									<a href = 'genre.php?genre=$uppercase'><div class = 'genre' id = '$genreID'></div></a>
-				        			<a href = 'article.php?id=$id'><h1>$title</h1></a>
-				        			<p><span>$author</span><span>	|	</span><span>$date</span></p>	
-				        			
-	                         		<img class = 'preview-image' src = '$image'>
-	                         		<br>
-				        			<div>
-					    				<p>$string</p>
-					    				<span>Tags: </span>";
-					    	foreach($tagArray as $tag) {
-					    		echo "<a href = 'tags.php?tag=$tag'><span>$tag</span></a>	";
-					    	}
-				        	echo "
-				        			</div>
-					    			<br>
+								<div class = 'preview-article pretty-box' style = 'background-color: black'>							
+									<div class = 'hold-image'>
+										<img src = '$image'>
+									</div>
+										<a href = 'genre.php?genre=$uppercase'><div class = 'genre' id = '$genreID'></div></a>
+										<br><br>
+										<div class = 'container'>
+						        			<a href = 'article.php?id=$id'><h1>$title</h1></a>
+						        			<p><span>$author</span><span>	|	</span><span>$date</span></p>	
+					        			</div>
+	                         			<br><br>
 				        		</div>
 				        		<script>
 				        			var element = document.getElementById('$genreID');
@@ -78,15 +74,17 @@
 				        $count+=1;
 				        if($count==6) { ?>
 				        			</div> <!-- end grid -->
+
 				        			<div class = "row">
-				        				<div class = "col-md-6 col-xs-12">
+				        				<div class = "col-md-3 col-xs-12 top-pad">
+				        					<h3>Latest</h3>
 				        					<div class = "media">
 					        					<div class = "media-left">
 					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
 					        					</div>
 					        					<div class = "media-body">
 					        						<h4 class = "media-heading">Media heading</h4>
-					        						<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text... </p>
+					        						<p>Date</p>
 					        					</div>
 					        				</div>
 					        				<div class = "media">
@@ -95,7 +93,7 @@
 					        					</div>
 					        					<div class = "media-body">
 					        						<h4 class = "media-heading">Media heading</h4>
-					        						<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text... </p>
+					        						<p>Date</p>
 					        					</div>
 					        				</div>
 					        				<div class = "media">
@@ -104,29 +102,107 @@
 					        					</div>
 					        					<div class = "media-body">
 					        						<h4 class = "media-heading">Media heading</h4>
-					        						<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text... </p>
+					        						<p>Date </p>
 					        					</div>
 					        				</div>					        				
 				        				</div>
-				        				<div class = "col-md-6 col-xs-12">
-				        					<div><img src = "img/image1.jpg" class = "centered-and-cropped second-row-image"></div>        				
+				        				<div class = "col-md-6 col-xs-12 top-pad big-pad">
+				        					<h3>Top News</h3>
+				        					<div class = "main-news">
+					        					<img class = "main-image" src = "./img/image1.jpg">
+					        					<h4>Title</h4>
+					        					<p>Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text </p>
+					        				</div>
+					        				<hr>
+					        				<div class = "row">
+					        					<div class = "col-md-6">
+					        						<div class = "us-news-home">
+					        							<h3>US</h3>
+					        							<div class = "md-article">
+						        							<img class = "med-img-home" src = "./img/image1.jpg">
+						        							<h4>Title</h4>
+						        							<p> Text Text text text Text text text Text text text</p>
+						        						</div>
+						        						<div class = "sm-article">
+						        							<h4>Title</h4>
+						        							<p> Text Text text text Text text text Text text text</p>
+						        						</div>
+						        						<div class = "sm-article">
+						        							<h4>Title</h4>
+						        							<p> Text Text text text Text text text Text text text</p>
+						        						</div>
+					        						</div>
+					        					</div>
+					        					<div class = "col-md-6">
+					        						<div class = "world-news-home">
+					        							<h3>World</h3>
+					        							<div class = "md-article">
+						        							<img class = "med-img-home" src = "./img/image1.jpg">
+						        							<h4>Title</h4>
+						        							<p> Text Text text text Text text text Text text text</p>
+						        						</div>
+						        						<div class = "sm-article">
+						        							<h4>Title</h4>
+						        							<p> Text Text text text Text text text Text text text</p>
+						        						</div>
+						        						<div class = "sm-article">
+						        							<h4>Title</h4>
+						        							<p> Text Text text text Text text text Text text text</p>
+						        						</div>
+					        						</div>
+					        					</div>
+					        				</div>
+
+				        				</div>
+				        				<div class = "col-md-3 col-xs-12 top-pad">
+				        					<h3>Staff's Picks</h3>
+				        					<div class = "media">
+					        					<div class = "media-left">
+					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
+					        					</div>
+					        					<div class = "media-body">
+					        						<h4 class = "media-heading">Media heading</h4>
+					        						<p>Date</p>
+					        					</div>
+					        				</div>
+					        				<div class = "media">
+					        					<div class = "media-left">
+					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
+					        					</div>
+					        					<div class = "media-body">
+					        						<h4 class = "media-heading">Media heading</h4>
+					        						<p>Date </p>
+					        					</div>
+					        				</div>
+					        				<div class = "media">
+					        					<div class = "media-left">
+					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
+					        					</div>
+					        					<div class = "media-body">
+					        						<h4 class = "media-heading">Media heading</h4>
+					        						<p>Date </p>
+					        					</div>
+					        				</div>
+					        				<div class = "tags">
+					        					<h3>Tags</h4>
+					        					<div>
+					        						<p>tag1		tag2	tag3	tag4	tag5</p>
+					        						<p>tag1		tag2	tag3	tag4	tag5</p>
+					        						<p>tag1		tag2	tag3	tag4	tag5</p>
+					        					</div>
+					        				</div>	
+					        				<a class="twitter-timeline" data-height="500" data-theme="light" href="https://twitter.com/TwoViewsPress">Tweets by TwoViewsPress</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>		       				
 				        				</div>
 				        			</div>
-					        	</div> <!-- end column -->
+					        	 <!-- end column -->
 
-					        	<div class = "col-md-3">
+					        	<div>
 					        		<h3 class = "article-sidebar-item">Who We Are</h3>
 					    			<hr class = "less-hr">
 					    			<img src = "img/two_views_logo.jpg" class = "centered">
-					    			<p>Two Views is a student run onling news service. We offer opinionated and sophisticated editorials, fresh perspectives on current events, and articles on the latest news.</p>
-
-					    			<h3 class = "article-sidebar-item">Search By Tags</h3>
-					    			<hr class = "less-hr">
-					    			<p>To create your first image blog post, click here and select 'Add & Edit Posts' > All Posts > This is the title of your first image post.Great looking images make your blog posts more visually compelling for your audience, and encourage readers to keep coming back. </p>
-
-					    			<a class="twitter-timeline" data-height="500" data-theme="light" href="https://twitter.com/TwoViewsPress">Tweets by TwoViewsPress</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+					    			<p>Two Views is a student run online news service. We offer opinionated and sophisticated editorials, fresh perspectives on current events, and articles on the latest news.</p>
 					        	</div>
-					        </div>
+					        
 
 
 
@@ -149,9 +225,7 @@
 	}
 ?>
 
-<div class = "row">
-	<div class = "col-md-9">
-		<div id = "grid" data-columns>
+<div id = "grid" data-columns>
 <?php
 
 	$home_articles = new home_articles();

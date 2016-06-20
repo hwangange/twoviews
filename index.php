@@ -80,21 +80,6 @@
 	        <br>
 
 	        <?php require 'database/get-home-articles.php'; ?>
-	        <div class = "row second-row">
-	        	<div class = "col-md-6 col-sm-4 col-xs-12">
-	        		<div><img src = "img/image1.jpg" class = "centered-and-cropped second-row-image"></div>
-	        	</div>
-
-	        	<div class = "col-md-3 col-sm-4 col-xs-12">
-	        		<div><img src = "img/image2.jpg" class = "centered-and-cropped second-row-image"></div>
-	        		<div><img src = "img/image4.jpg" class = "centered-and-cropped second-row-image"></div>
-	        	</div>
-	        	<div class = "col-md-3 col-sm-4 col-xs-12">
-	        		<div><img src = "img/image3.jpg" class = "centered-and-cropped second-row-image"></div>
-	        		<div><img src = "img/image6.jpg" class = "centered-and-cropped second-row-image"></div>
-	        	</div>
-	        </div>
-	
 
 		<?php require 'footer.php'; ?>
 	    </div>
