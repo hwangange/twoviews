@@ -104,7 +104,36 @@
 					        						<h4 class = "media-heading">Media heading</h4>
 					        						<p>Date </p>
 					        					</div>
-					        				</div>					        				
+					        				</div>
+					        				<div class = "media">
+					        					<div class = "media-left">
+					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
+					        					</div>
+					        					<div class = "media-body">
+					        						<h4 class = "media-heading">Media heading</h4>
+					        						<p>Date</p>
+					        					</div>
+					        				</div>
+					        				<div class = "media">
+					        					<div class = "media-left">
+					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
+					        					</div>
+					        					<div class = "media-body">
+					        						<h4 class = "media-heading">Media heading</h4>
+					        						<p>Date </p>
+					        					</div>
+					        				</div><!--end media -->
+
+					        				<div class = "editorial-preview">
+					        					<h3>Featured Article</h3>
+					        					<img class = 'preview-image' src = './img/image1.jpg'>
+					        					<h4><b>Title</b></h4>
+					        					<p><span>Author</span><span>	|	</span><span>Date</span></p>
+					        					<p>Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text </p>
+					        					<p>Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text </p>
+					        					<p>Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text </p>
+					        					<p>Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text </p>
+					        				</div>									        				
 				        				</div>
 				        				<div class = "col-md-6 col-xs-12 top-pad big-pad">
 				        					<h3>Top News</h3>
@@ -118,36 +147,82 @@
 					        					<div class = "col-md-6">
 					        						<div class = "us-news-home">
 					        							<h3>US</h3>
-					        							<div class = "md-article">
-						        							<img class = "med-img-home" src = "./img/image1.jpg">
-						        							<h4>Title</h4>
-						        							<p> Text Text text text Text text text Text text text</p>
-						        						</div>
-						        						<div class = "sm-article">
-						        							<h4>Title</h4>
-						        							<p> Text Text text text Text text text Text text text</p>
-						        						</div>
-						        						<div class = "sm-article">
-						        							<h4>Title</h4>
-						        							<p> Text Text text text Text text text Text text text</p>
+						        						<div class = 'list-group'>
+						        							<a href = '#' class = 'list-group-item'>
+						        								<div class = "md-article">
+								        							<img class = "med-img-home" src = "./img/image1.jpg">
+								        							<h4>Title</h4>
+								        							<p> Text Text text text Text text text Text text text</p>
+						        								</div>
+						        							</a>
+						        							<a href = '#' class = 'list-group-item'>Link</a>
+						        							<a href = '#' class = 'list-group-item'>Link</a>
+						        							<a href = '#' class = 'list-group-item'>Link</a>
 						        						</div>
 					        						</div>
 					        					</div>
 					        					<div class = "col-md-6">
 					        						<div class = "world-news-home">
 					        							<h3>World</h3>
-					        							<div class = "md-article">
-						        							<img class = "med-img-home" src = "./img/image1.jpg">
-						        							<h4>Title</h4>
-						        							<p> Text Text text text Text text text Text text text</p>
+					        							<div class = 'list-group'>
+						        							<a href = '#' class = 'list-group-item'>
+						        								<div class = "md-article">
+								        							<img class = "med-img-home" src = "./img/image1.jpg">
+								        							<h4>Title</h4>
+								        							<p> Text Text text text Text text text Text text text</p>
+						        								</div>
+						        							</a>
+						        							<a href = '#' class = 'list-group-item'>Link</a>
+						        							<a href = '#' class = 'list-group-item'>Link</a>
+						        							<a href = '#' class = 'list-group-item'>Link</a>
 						        						</div>
-						        						<div class = "sm-article">
-						        							<h4>Title</h4>
-						        							<p> Text Text text text Text text text Text text text</p>
+					        						</div>
+					        					</div>
+					        				</div>
+					        				<div class = "row">
+					        					<div class = "col-md-12">
+					        						<div class = "tech-news-home">
+					        							<h3>Tech & Sciences</h3>
+						        						<div class = 'list-group'>
+						        							<a href = '#' class = 'list-group-item'>
+						        								<div class = "md-article">
+						        									<div class = "row">
+						        										<div class = "col-md-6">
+						        											<img class = "med-img-home" src = "./img/image1.jpg">
+						        										</div>
+						        										<div class = "col-md-6">
+						        											<h4>Title</h4>
+								        									<p> Text Text text text Text text text Text text text</p>
+						        										</div>
+						        									</div>
+						        								</div>
+						        							</a>
+						        							<a href = '#' class = 'list-group-item'>Link</a>
+						        							<a href = '#' class = 'list-group-item'>Link</a>
+						        							<a href = '#' class = 'list-group-item'>Link</a>
 						        						</div>
-						        						<div class = "sm-article">
-						        							<h4>Title</h4>
-						        							<p> Text Text text text Text text text Text text text</p>
+					        						</div>
+					        					</div>
+					        					<div class = "col-md-12">
+					        						<div class = "enth-news-home">
+					        							<h3>Entertainment</h3>
+						        						<div class = 'list-group'>
+						        							<a href = '#' class = 'list-group-item'>
+						        								<div class = "md-article">
+						        									<div class = "row">
+						        										<div class = "col-md-6">
+						        											<h4>Title</h4>
+								        									<p> Text Text text text Text text text Text text text</p>
+						        										</div>
+						        										<div class = "col-md-6">
+						        											<img class = "med-img-home" src = "./img/image1.jpg">
+						        										</div>
+						        									</div>
+						        								</div>
+						        							</a>
+						        							<a href = '#' class = 'list-group-item'>Link</a>
+						        							<a href = '#' class = 'list-group-item'>Link</a>
+						        							<a href = '#' class = 'list-group-item'>Link</a>
 						        						</div>
 					        						</div>
 					        					</div>
@@ -182,6 +257,36 @@
 					        						<h4 class = "media-heading">Media heading</h4>
 					        						<p>Date </p>
 					        					</div>
+					        				</div>
+					        				<div class = "school-news-home">
+					        					<h3>School</h3>
+						        				<div class = 'list-group'>
+						        					<a href = '#' class = 'list-group-item'>
+						        						<div class = "md-article">
+								        					<img class = "med-img-home" src = "./img/image1.jpg">
+								        					<h4>Title</h4>
+								        					<p> Text Text text text Text text text Text text text</p>
+						        						</div>
+						        					</a>
+						        					<a href = '#' class = 'list-group-item'>Link</a>
+						        					<a href = '#' class = 'list-group-item'>Link</a>
+						        					<a href = '#' class = 'list-group-item'>Link</a>
+						        				</div>
+					        				</div>
+					        				<div class = "life-news-home">
+					        					<h3>Lifestyle & Health</h3>
+						        				<div class = 'list-group'>
+						        					<a href = '#' class = 'list-group-item'>
+						        						<div class = "md-article">
+								        					<img class = "med-img-home" src = "./img/image1.jpg">
+								        					<h4>Title</h4>
+								        					<p> Text Text text text Text text text Text text text</p>
+						        						</div>
+						        					</a>
+						        					<a href = '#' class = 'list-group-item'>Link</a>
+						        					<a href = '#' class = 'list-group-item'>Link</a>
+						        					<a href = '#' class = 'list-group-item'>Link</a>
+						        				</div>
 					        				</div>
 					        				<div class = "tags">
 					        					<h3>Tags</h4>
