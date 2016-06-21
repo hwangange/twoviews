@@ -68,6 +68,17 @@
 		return $returnString;
 	}
 
+	function array_unique_compact($a) {
+		 $tmparr = array_unique($a);
+		 $i=0;
+		 foreach ($tmparr as $v) {
+		   $newarr[$i] = $v;
+		   $i++;
+		 }
+		 return $newarr;
+
+	}
+
 	class home_articles {
 
 		private $db;
@@ -405,14 +416,39 @@
 					        					<h3>Lifestyle & Health</h3>
 					        					<?php vertical_column($news);?>
 					        				</div>
-				        			
+
 					        				<div class = "tags">
 					        					<h3>Tags</h3>
-					        					<div>
-					        						<p>tag1		tag2	tag3	tag4	tag5</p>
-					        						<p>tag1		tag2	tag3	tag4	tag5</p>
-					        						<p>tag1		tag2	tag3	tag4	tag5</p>
-					        					</div>
+					        					<div class="panel panel-default">
+												  <div class="panel-body">
+						        				<?php
+						        					$tagRows = array();
+						        					$query = "SELECT * from articles";
+						        					$result = mysqli_query($this->connection, $query);
+						        					while($row = $result->fetch_assoc()) {
+						        						$tagRows = array_merge($tagRows, explode(',', $row['tags']));
+						        					}
+						        					$tagCount = array_count_values($tagRows);
+						        					$tagRows = array_unique_compact($tagRows);
+
+													$max = max($tagCount);
+													$min = min($tagCount);
+
+													$x = 18; // 18px
+													$y = 11; // 11px
+
+													$stepvalue = ($max - $min) / ($x - $y);	
+
+
+						        					 for($i=0;$i<count($tagRows);$i++)
+													 {
+													   echo '<a href="tags.php?tag='.$tagRows[$i].'" 
+													    style="font-size:'. ( $y + round( ($tagCount[$tagRows[$i]]-$min) / $stepvalue ) ).'px;">'. $tagRows[$i].'</a>';
+													   if($i<count($tagRows)-1) echo ",\n";
+													 }		
+						        				?>
+						        				 	</div> <!-- end panel-body -->
+												</div> <!-- end panel -->
 					        				</div>	
 					        				<a class="twitter-timeline" data-height="500" data-theme="light" href="https://twitter.com/TwoViewsPress">Tweets by TwoViewsPress</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>		       				
 				        				</div>
