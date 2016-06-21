@@ -1,6 +1,47 @@
 <?php
 	require_once 'connection.php';
 
+	function truncate($text, $length, $id) {
+			$string = strip_tags($text);
+
+			if (strlen($string) > $length) {
+			    $stringCut = substr($string, 0, $length);
+			    $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'... <a href="article.php?id='.$id.'">Read More</a>'; 
+			}
+
+			return $string;
+	}
+
+	function vertical_column($news) {
+		$id = $news[0]['id'];
+		$title = $news[0]['title'];
+		$image = $news[0]['image'];
+		$string = truncate($news[0]['text'], 50, $id);
+	?>
+
+		<ul class = 'list-group'>
+			<li class = "list-group-item">
+				<div class = 'md-article'>
+					<img class = 'med-img-home' src = '<?php echo $image;?>' >
+					<h4><a href = "article.php?id=<?php echo $id;?>"><?php echo $title;?></a></h4>
+					<p><?php echo $string;?></p>
+				</div>
+ 			</li>
+	<?php
+			print_bottom_articles($news);
+
+			?></ul><?php
+	}
+
+	function print_bottom_articles($news) {
+		$length = sizeof($news);
+		for($x = 1; $x < $length; $x++) {
+			$title = $news[$x]['title'];
+			$id = $news[$x]['id'];
+			echo "<li class = 'list-group-item'><a href = 'article.php?id=".$id."'>$title</a></li>";
+		}
+	}
+
 	class home_articles {
 
 		private $db;
@@ -25,13 +66,7 @@
 						$text = $row['text'];
 						$image = $row['image'];
 
-						$string = strip_tags($text);
-
-						if (strlen($string) > 40) {
-						    $stringCut = substr($string, 0, 40);
-						    $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'... <a href="article.php?id='.$id.'">Read More</a>'; 
-						}
-
+						$string = truncate($text, 40, $id);
 						if($count==1) {
 							echo "<div class='item active' id = '$id'>
 							      <img src= '$image' class = 'centered-and-cropped'>
@@ -54,9 +89,20 @@
 							echo "<script> var element = document.getElementById('carousel-".$count."');
 				        			element.innerHTML += '<h3>".$title."</h3>';</script>";
 				        $count = $count + 1;
+				        $data[] = $id;
 					}
 				} ?>
 					</div><!-- end carousel-inner-->
+					<div class = "carousel-controls">
+					  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+					    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					    <span class="sr-only">Previous</span>
+					  </a>
+					  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+					    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					    <span class="sr-only">Next</span>
+					  </a>
+					</div>
 				</div> <!-- End #myCarousel-->
 		        <br>
 
@@ -64,62 +110,53 @@
 
 				//PRETTY BOXES
 				echo "<div id = 'grid' data-columns>";
-				$query = "Select * from articles WHERE breaking = '0' ORDER BY id DESC LIMIT 6";
-				$result = mysqli_query($this->connection, $query);
-				if(mysqli_num_rows($result)!=0){
-					$count = 0;
-					$length = mysqli_num_rows($result);
+				$count = 1;
+				$genres = array('1' => 'us', '2' => 'international', '3' => 'science', '4' =>'school', '5' => 'life', '6' => 'entertainment');
+				while($count < 7) {
+					$query = "Select * from articles WHERE breaking = '0' AND genre = '".$genres[strval($count)]."' ORDER BY id DESC LIMIT 1";
+					$result = mysqli_query($this->connection, $query);
+					if(mysqli_num_rows($result)!=0){
+						
+						$length = mysqli_num_rows($result);
 
-					while ($row = $result->fetch_assoc()) {
-						$id = $row['id'];
-						$title = $row['title'];
-						$author = $row['author'];
-						$date = $row['date'];
-						$text = $row['text'];
-						$image = $row['image'];
-						$genre= $row['genre'];
-						$tags = $row['tags'];
-						$genreID = 'genre'.$id;
+						while ($row = $result->fetch_assoc()) {
+							$id = $row['id'];
+							$title = $row['title'];
+							$author = $row['author'];
+							$date = $row['date'];
+							$text = $row['text'];
+							$image = $row['image'];
+							$genre= $row['genre'];
+							$tags = $row['tags'];
+							$genreID = 'genre'.$id;
 
-						$string = strip_tags($text);
-
-						if (strlen($string) > 100) {
-
-						    // truncate string
-						    $stringCut = substr($string, 0, 100);
-
-						    // make sure it ends in a word so assassinate doesn't become ass...
-						    $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'... <a href="article.php?id='.$id.'">Read More</a>'; 
-						}
-
-						$tags = str_replace(' ', '', $tags);
-						$tagArray = explode(',', $tags);
-
-						$uppercase = ucfirst($genre);
-
-						if($count<6) {
-							$imgUrl = "./img/image1.jpg";
+							$uppercase = ucfirst($genre);
 							echo"
-								<div class = 'preview-article pretty-box' style = 'background-color: black'>							
-									<div class = 'hold-image'>
-										<img src = '$image'>
-									</div>
-										<a href = 'genre.php?genre=$uppercase'><div class = 'genre' id = '$genreID'></div></a>
-										<br><br>
-										<div class = 'container'>
-						        			<a href = 'article.php?id=$id'><h1>$title</h1></a>
-						        			<p><span>$author</span><span>	|	</span><span>$date</span></p>	
-					        			</div>
-	                         			<br><br>
-				        		</div>
-				        		<script>
-				        			var element = document.getElementById('$genreID');
-				        			element.className += ' genre-' + '$genre';
-				        			element.innerHTML += '$genre'.toUpperCase(); 
-				        		</script>";
-				        }
-				        $count+=1;
-				        if($count==6) { ?>
+									<div class = 'preview-article pretty-box' style = 'background-color: black'>							
+										<div class = 'hold-image'>
+											<img src = '$image'>
+										</div>
+											<a href = 'genre.php?genre=$uppercase'><div class = 'genre' id = '$genreID'></div></a>
+											<br><br>
+											<div class = 'container'>
+							        			<a href = 'article.php?id=$id'><h1>$title</h1></a>
+							        			<p><span>$author</span><span>	|	</span><span>$date</span></p>	
+						        			</div>
+		                         			<br><br>
+					        		</div>
+					        		<script>
+					        			var element = document.getElementById('$genreID');
+					        			element.className += ' genre-' + '$genre';
+					        			element.innerHTML += '$genre'.toUpperCase(); 
+					        		</script>";
+					        $data[] = $id;
+					        
+					        
+					       }
+					      }
+					      $count = $count + 1;
+				     }
+				   ?>
 				        			</div> <!-- end grid -->
 
 				        			<div class = "row">
@@ -184,93 +221,147 @@
 				        				</div>
 				        				<div class = "col-md-6 col-xs-12 top-pad big-pad">
 				        					<h3>Top News</h3>
-				        					<div class = "main-news">
-					        					<img class = "main-image" src = "./img/image1.jpg">
-					        					<h4>Title</h4>
-					        					<p>Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text </p>
-					        				</div>
+
+				        					<?php
+				        						$query = "Select * from articles WHERE breaking = '0' AND top = '1' ORDER BY id DESC LIMIT 1";
+												$result = mysqli_query($this->connection, $query);
+												if(mysqli_num_rows($result)!=0){
+													
+													$length = mysqli_num_rows($result);
+
+													while ($row = $result->fetch_assoc()) {
+														$id = $row['id'];
+														$title = $row['title'];
+														$text = $row['text'];
+														$image = $row['image'];
+														$string = truncate($text, 100, $id);
+													
+														echo "
+															<div class = 'main-news'>
+									        					<img class = 'main-image' src = '$image'>
+									        					<h4>$title</h4>
+									        					<p>$string</p>
+									        				</div>
+														";
+
+														$data[] = $id;
+
+													}
+												}
+				        					?>
+				        		
 					        				<hr>
+
+					        				<?php 
+					        					$query = "Select * from articles WHERE breaking = '0' AND genre = 'us' ORDER BY id DESC LIMIT 4";
+												$result = mysqli_query($this->connection, $query);
+												$news = array();
+												while($row = $result->fetch_assoc()) {
+													$news[] = $row;
+													$data[] = $row['id'];
+												}			
+					        				?>
+
 					        				<div class = "row">
 					        					<div class = "col-md-6">
 					        						<div class = "us-news-home">
 					        							<h3>US</h3>
-						        						<div class = 'list-group'>
-						        							<a href = '#' class = 'list-group-item'>
-						        								<div class = "md-article">
-								        							<img class = "med-img-home" src = "./img/image1.jpg">
-								        							<h4>Title</h4>
-								        							<p> Text Text text text Text text text Text text text</p>
-						        								</div>
-						        							</a>
-						        							<a href = '#' class = 'list-group-item'>Link</a>
-						        							<a href = '#' class = 'list-group-item'>Link</a>
-						        							<a href = '#' class = 'list-group-item'>Link</a>
-						        						</div>
+						        						<?php vertical_column($news);?>
 					        						</div>
 					        					</div>
+
+					        					<?php 
+					        						$query = "Select * from articles WHERE breaking = '0' AND genre = 'international' ORDER BY id DESC LIMIT 4";
+													$result = mysqli_query($this->connection, $query);
+													unset($news);
+													$news = array();
+													while($row = $result->fetch_assoc()) {
+														$news[] = $row;
+														$data[] = $row['id'];
+													}
+					        					?>
+
+
 					        					<div class = "col-md-6">
 					        						<div class = "world-news-home">
 					        							<h3>World</h3>
-					        							<div class = 'list-group'>
-						        							<a href = '#' class = 'list-group-item'>
-						        								<div class = "md-article">
-								        							<img class = "med-img-home" src = "./img/image1.jpg">
-								        							<h4>Title</h4>
-								        							<p> Text Text text text Text text text Text text text</p>
-						        								</div>
-						        							</a>
-						        							<a href = '#' class = 'list-group-item'>Link</a>
-						        							<a href = '#' class = 'list-group-item'>Link</a>
-						        							<a href = '#' class = 'list-group-item'>Link</a>
-						        						</div>
+					        							<?php vertical_column($news);?>
 					        						</div>
 					        					</div>
 					        				</div>
 					        				<div class = "row">
 					        					<div class = "col-md-12">
+
+						        					<?php 
+						        						$query = "Select * from articles WHERE breaking = '0' AND genre = 'science' ORDER BY id DESC LIMIT 4";
+														$result = mysqli_query($this->connection, $query);
+														unset($news);
+														$news = array();
+														while($row = $result->fetch_assoc()) {
+															$news[] = $row;
+															$data[] = $row['id'];
+														}
+
+														$id = $news[0]['id'];
+														$title = $news[0]['title'];
+														$image = $news[0]['image'];
+														$string = truncate($news[0]['text'], 50, $id);
+						        					?>
 					        						<div class = "tech-news-home">
 					        							<h3>Tech & Sciences</h3>
-						        						<div class = 'list-group'>
-						        							<a href = '#' class = 'list-group-item'>
+						        						<ul class = 'list-group'>
+						        							<li class = 'list-group-item'>
 						        								<div class = "md-article">
 						        									<div class = "row">
 						        										<div class = "col-md-6">
-						        											<img class = "med-img-home" src = "./img/image1.jpg">
+						        											<img class = "med-img-home" src = "<?php echo $image;?>">
 						        										</div>
 						        										<div class = "col-md-6">
-						        											<h4>Title</h4>
-								        									<p> Text Text text text Text text text Text text text</p>
+						        											<h4><a href = 'article.php?id=<?php echo $id;?>'><?php echo $title;?></a></h4>
+								        									<p><?php echo $string;?></p>
 						        										</div>
 						        									</div>
 						        								</div>
-						        							</a>
-						        							<a href = '#' class = 'list-group-item'>Link</a>
-						        							<a href = '#' class = 'list-group-item'>Link</a>
-						        							<a href = '#' class = 'list-group-item'>Link</a>
-						        						</div>
+						        							</li>
+						        							<?php print_bottom_articles($news);?>
+						        						</ul>
 					        						</div>
 					        					</div>
 					        					<div class = "col-md-12">
-					        						<div class = "enth-news-home">
+					        						<?php 
+						        						$query = "Select * from articles WHERE breaking = '0' AND genre = 'entertainment' ORDER BY id DESC LIMIT 4";
+														$result = mysqli_query($this->connection, $query);
+														unset($news);
+														$news = array();
+														while($row = $result->fetch_assoc()) {
+															$news[] = $row;
+															$data[] = $row['id'];
+														}
+
+														$id = $news[0]['id'];
+														$title = $news[0]['title'];
+														$image = $news[0]['image'];
+														$string = truncate($news[0]['text'], 50, $id);
+						        					?>
+
+					        						<div class = "ent-news-home">
 					        							<h3>Entertainment</h3>
-						        						<div class = 'list-group'>
-						        							<a href = '#' class = 'list-group-item'>
+						        						<ul class = 'list-group'>
+						        							<li class = 'list-group-item'>
 						        								<div class = "md-article">
 						        									<div class = "row">
 						        										<div class = "col-md-6">
-						        											<h4>Title</h4>
-								        									<p> Text Text text text Text text text Text text text</p>
+						        											<h4><a href = 'article.php?id=<?php echo $id;?>'><?php echo $title;?></a></h4>
+								        									<p><?php echo $string;?></p>
 						        										</div>
 						        										<div class = "col-md-6">
-						        											<img class = "med-img-home" src = "./img/image1.jpg">
+						        											<img class = "med-img-home" src = "<?php echo $image;?>">
 						        										</div>
 						        									</div>
 						        								</div>
-						        							</a>
-						        							<a href = '#' class = 'list-group-item'>Link</a>
-						        							<a href = '#' class = 'list-group-item'>Link</a>
-						        							<a href = '#' class = 'list-group-item'>Link</a>
-						        						</div>
+						        							</li>
+						        							<?php print_bottom_articles($news);?>
+						        						</ul>
 					        						</div>
 					        					</div>
 					        				</div>
@@ -308,37 +399,39 @@
 
 
 				        					?>
-				        			
+
+				        					<?php 
+					        						$query = "Select * from articles WHERE breaking = '0' AND genre = 'school' ORDER BY id DESC LIMIT 4";
+													$result = mysqli_query($this->connection, $query);
+													unset($news);
+													$news = array();
+													while($row = $result->fetch_assoc()) {
+														$news[] = $row;
+														$data[] = $row['id'];
+													}
+					        				?>
+        					
 					        				<div class = "school-news-home">
 					        					<h3>School</h3>
-						        				<div class = 'list-group'>
-						        					<a href = '#' class = 'list-group-item'>
-						        						<div class = "md-article">
-								        					<img class = "med-img-home" src = "./img/image1.jpg">
-								        					<h4>Title</h4>
-								        					<p> Text Text text text Text text text Text text text</p>
-						        						</div>
-						        					</a>
-						        					<a href = '#' class = 'list-group-item'>Link</a>
-						        					<a href = '#' class = 'list-group-item'>Link</a>
-						        					<a href = '#' class = 'list-group-item'>Link</a>
-						        				</div>
+					        					<?php vertical_column($news);?>
 					        				</div>
+
+					        				<?php 
+					        						$query = "Select * from articles WHERE breaking = '0' AND genre = 'life' ORDER BY id DESC LIMIT 4";
+													$result = mysqli_query($this->connection, $query);
+													unset($news);
+													$news = array();
+													while($row = $result->fetch_assoc()) {
+														$news[] = $row;
+														$data[] = $row['id'];
+													}
+					        				?>
+        					
 					        				<div class = "life-news-home">
 					        					<h3>Lifestyle & Health</h3>
-						        				<div class = 'list-group'>
-						        					<a href = '#' class = 'list-group-item'>
-						        						<div class = "md-article">
-								        					<img class = "med-img-home" src = "./img/image1.jpg">
-								        					<h4>Title</h4>
-								        					<p> Text Text text text Text text text Text text text</p>
-						        						</div>
-						        					</a>
-						        					<a href = '#' class = 'list-group-item'>Link</a>
-						        					<a href = '#' class = 'list-group-item'>Link</a>
-						        					<a href = '#' class = 'list-group-item'>Link</a>
-						        				</div>
+					        					<?php vertical_column($news);?>
 					        				</div>
+				        			
 					        				<div class = "tags">
 					        					<h3>Tags</h3>
 					        					<div>
@@ -357,13 +450,8 @@
 
 
 
-				     <?php   }
-				     	else if ($count > 6) {
-
-				     	}
-					}
-				} 
-
+				     <?php   
+				   
 				/*if(mysql_num_rows($result)) {
 					while($row = mysql_fetch_assoc($result)) {
 						$data['emp_info'][] = $row;
@@ -371,9 +459,9 @@
 				}*/
 
 				mysqli_close($this->connection);
-		}
+		} //find articles method
 
-	}
+	} //home articles class
 ?>
 
 
@@ -381,5 +469,5 @@
 
 	$home_articles = new home_articles();	
 	$home_articles -> find_articles();
-		
+	$data = array(); //used articles
 ?>

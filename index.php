@@ -22,17 +22,6 @@
 			    <li data-target="#myCarousel" data-slide-to="4" class = "list-group-item" id = "carousel-5"></li>
 			  </ol>
 
-			  <div class = "carousel-controls">
-				  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-				    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-				    <span class="sr-only">Previous</span>
-				  </a>
-				  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-				    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-				    <span class="sr-only">Next</span>
-				  </a>
-				</div>
-
 			  <!-- Wrapper for slides -->
 			  <div class="carousel-inner">
 			    
