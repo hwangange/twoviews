@@ -42,6 +42,32 @@
 		}
 	}
 
+	function display_media($result) {
+		$returnString = "";
+		if(mysqli_num_rows($result)!=0){
+			$count = 0;
+			$length = mysqli_num_rows($result);	
+
+			while ($row = $result->fetch_assoc()) {
+				$id = $row['id'];
+				$title = $row['title'];
+				$image = $row['image'];
+				$date = $row['date'];
+
+				$returnString = $returnString . "<div class = 'media'>
+							<div class = 'media-left'>			
+								<a href='article.php?id=".$id."'><img class = 'media-object' src = '$image'></a>
+							</div>
+							<div class = 'media-body'>
+								<a href='article.php?id=".$id."'><h4 class = 'media-heading'>$title</h4></a>
+								<p>$date</p>
+							</div>
+						</div>";
+			}
+		}
+		return $returnString;
+	}
+
 	class home_articles {
 
 		private $db;
@@ -161,52 +187,10 @@
 
 				        			<div class = "row">
 				        				<div class = "col-md-3 col-xs-12 top-pad">
-				        					<h3>Latest</h3>
-				        					<div class = "media">
-					        					<div class = "media-left">
-					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
-					        					</div>
-					        					<div class = "media-body">
-					        						<h4 class = "media-heading">Media heading</h4>
-					        						<p>Date</p>
-					        					</div>
-					        				</div>
-					        				<div class = "media">
-					        					<div class = "media-left">
-					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
-					        					</div>
-					        					<div class = "media-body">
-					        						<h4 class = "media-heading">Media heading</h4>
-					        						<p>Date</p>
-					        					</div>
-					        				</div>
-					        				<div class = "media">
-					        					<div class = "media-left">
-					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
-					        					</div>
-					        					<div class = "media-body">
-					        						<h4 class = "media-heading">Media heading</h4>
-					        						<p>Date </p>
-					        					</div>
-					        				</div>
-					        				<div class = "media">
-					        					<div class = "media-left">
-					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
-					        					</div>
-					        					<div class = "media-body">
-					        						<h4 class = "media-heading">Media heading</h4>
-					        						<p>Date</p>
-					        					</div>
-					        				</div>
-					        				<div class = "media">
-					        					<div class = "media-left">
-					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
-					        					</div>
-					        					<div class = "media-body">
-					        						<h4 class = "media-heading">Media heading</h4>
-					        						<p>Date </p>
-					        					</div>
-					        				</div><!--end media -->
+				        					<div id = "latest">
+					        					<h3>Latest</h3>
+					        					<!--media goes here -->
+						        			</div>
 
 					        				<div class = "editorial-preview">
 					        					<h3>Featured Article</h3>
@@ -373,29 +357,7 @@
 
 											$query = "Select * from articles WHERE staff = '1' ORDER BY id DESC LIMIT 3";
 											$result = mysqli_query($this->connection, $query);
-											if(mysqli_num_rows($result)!=0){
-												$count = 0;
-												$length = mysqli_num_rows($result);
-
-												while ($row = $result->fetch_assoc()) {
-													$id = $row['id'];
-													$title = $row['title'];
-													$image = $row['image'];
-													$date = $row['date'];
-
-													echo "
-														<div class = 'media'>
-								        					<div class = 'media-left'>
-								        						<a href='article.php?id=".$id."'><img class = 'media-object' src = '$image'></a>
-								        					</div>
-								        					<div class = 'media-body'>
-								        						<a href='article.php?id=".$id."'><h4 class = 'media-heading'>$title</h4></a>
-								        						<p>$date</p>
-								        					</div>
-								        				</div>
-													";
-												}
-											}
+											display_media($result);
 
 
 				        					?>
@@ -451,12 +413,27 @@
 
 
 				     <?php   
-				   
-				/*if(mysql_num_rows($result)) {
-					while($row = mysql_fetch_assoc($result)) {
-						$data['emp_info'][] = $row;
+				//Display LATEST articles
+				$query = "Select * from articles WHERE breaking = '0' AND staff = '0' AND top = '0' AND id NOT IN(";
+
+				for($x = 0; $x < sizeof($data); $x++) {
+					$query = $query . "'" . $data[$x] . "'";
+					if($x != sizeof($data)-1) {
+						$query = $query . ", ";
 					}
-				}*/
+				}
+
+				$query = $query . ") ORDER BY id DESC LIMIT 5";
+				$result = mysqli_query($this->connection, $query);
+				
+				$latestHtml = display_media($result);
+				?>
+				
+				<script> 
+					var latest = document.getElementById("latest");
+					var string = "<?php echo preg_replace("/\r?\n/", "\\n", addslashes($latestHtml)); ?>";
+					latest.innerHTML+= string; </script>;
+				<?php
 
 				mysqli_close($this->connection);
 		} //find articles method
@@ -468,6 +445,7 @@
 <?php
 
 	$home_articles = new home_articles();	
-	$home_articles -> find_articles();
 	$data = array(); //used articles
+	$home_articles -> find_articles();
 ?>
+
