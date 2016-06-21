@@ -13,15 +13,62 @@
 
 		public function find_articles(){
 
-				$query = "Select * from articles ORDER BY id DESC LIMIT 6";
+				//CAROUSEL
+				$query = "Select * from articles WHERE breaking = '1' ORDER by id DESC LIMIT 5";
 				$result = mysqli_query($this->connection, $query);
-				if(mysqli_num_rows($result)==0){
-					$data = array('empty' => 'No results found.');
-							//$json['empty'] = 'No results found.';
-				}else{
+				if(mysqli_num_rows($result)!=0){
+					$count = 1;
+					$length = mysqli_num_rows($result);
+					while ($row = $result->fetch_assoc()) {
+						$id = $row['id'];
+						$title = $row['title'];
+						$text = $row['text'];
+						$image = $row['image'];
+
+						$string = strip_tags($text);
+
+						if (strlen($string) > 40) {
+						    $stringCut = substr($string, 0, 40);
+						    $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'... <a href="article.php?id='.$id.'">Read More</a>'; 
+						}
+
+						if($count==1) {
+							echo "<div class='item active' id = '$id'>
+							      <img src= '$image' class = 'centered-and-cropped'>
+							      <div class='carousel-caption'>
+							        <a href = 'article.php?id=".$id."'<h3>$title</h3></a>
+							        <p>$string</p>
+							      </div> 
+							   </div>";
+						} else {
+							echo "<div class='item' id = '$id'>
+							      <img src= '$image' class = 'centered-and-cropped'>
+							      <div class='carousel-caption'>
+							        <a href = 'article.php?id=".$id."'<h3>$title</h3></a>
+							        <p>$string</p>
+							      </div> 
+							   </div>";
+						}
+
+
+							echo "<script> var element = document.getElementById('carousel-".$count."');
+				        			element.innerHTML += '<h3>".$title."</h3>';</script>";
+				        $count = $count + 1;
+					}
+				} ?>
+					</div><!-- end carousel-inner-->
+				</div> <!-- End #myCarousel-->
+		        <br>
+
+				<?php
+
+				//PRETTY BOXES
+				echo "<div id = 'grid' data-columns>";
+				$query = "Select * from articles WHERE breaking = '0' ORDER BY id DESC LIMIT 6";
+				$result = mysqli_query($this->connection, $query);
+				if(mysqli_num_rows($result)!=0){
 					$count = 0;
 					$length = mysqli_num_rows($result);
-					$data = array('success' => 'Results found.', 'length' => $length);
 
 					while ($row = $result->fetch_assoc()) {
 						$id = $row['id'];
@@ -231,33 +278,37 @@
 				        				</div>
 				        				<div class = "col-md-3 col-xs-12 top-pad">
 				        					<h3>Staff's Picks</h3>
-				        					<div class = "media">
-					        					<div class = "media-left">
-					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
-					        					</div>
-					        					<div class = "media-body">
-					        						<h4 class = "media-heading">Media heading</h4>
-					        						<p>Date</p>
-					        					</div>
-					        				</div>
-					        				<div class = "media">
-					        					<div class = "media-left">
-					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
-					        					</div>
-					        					<div class = "media-body">
-					        						<h4 class = "media-heading">Media heading</h4>
-					        						<p>Date </p>
-					        					</div>
-					        				</div>
-					        				<div class = "media">
-					        					<div class = "media-left">
-					        						<a href="#"><img class = "media-object" src = "img/image1.jpg"></a>
-					        					</div>
-					        					<div class = "media-body">
-					        						<h4 class = "media-heading">Media heading</h4>
-					        						<p>Date </p>
-					        					</div>
-					        				</div>
+				        					<?php
+
+											$query = "Select * from articles WHERE staff = '1' ORDER BY id DESC LIMIT 3";
+											$result = mysqli_query($this->connection, $query);
+											if(mysqli_num_rows($result)!=0){
+												$count = 0;
+												$length = mysqli_num_rows($result);
+
+												while ($row = $result->fetch_assoc()) {
+													$id = $row['id'];
+													$title = $row['title'];
+													$image = $row['image'];
+													$date = $row['date'];
+
+													echo "
+														<div class = 'media'>
+								        					<div class = 'media-left'>
+								        						<a href='article.php?id=".$id."'><img class = 'media-object' src = '$image'></a>
+								        					</div>
+								        					<div class = 'media-body'>
+								        						<a href='article.php?id=".$id."'><h4 class = 'media-heading'>$title</h4></a>
+								        						<p>$date</p>
+								        					</div>
+								        				</div>
+													";
+												}
+											}
+
+
+				        					?>
+				        			
 					        				<div class = "school-news-home">
 					        					<h3>School</h3>
 						        				<div class = 'list-group'>
@@ -289,7 +340,7 @@
 						        				</div>
 					        				</div>
 					        				<div class = "tags">
-					        					<h3>Tags</h4>
+					        					<h3>Tags</h3>
 					        					<div>
 					        						<p>tag1		tag2	tag3	tag4	tag5</p>
 					        						<p>tag1		tag2	tag3	tag4	tag5</p>
@@ -325,11 +376,10 @@
 	}
 ?>
 
-<div id = "grid" data-columns>
+
 <?php
 
-	$home_articles = new home_articles();
-	$data = array();	
+	$home_articles = new home_articles();	
 	$home_articles -> find_articles();
 		
 ?>
