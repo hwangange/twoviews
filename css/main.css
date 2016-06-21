@@ -164,6 +164,13 @@ body { padding-top: 50px; }
 	object-fit: cover;
 }
 
+.poll {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 150px
+}
+
 /*******************SECOND COLUMN**********/
 
 .second-row {

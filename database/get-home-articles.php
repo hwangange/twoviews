@@ -192,16 +192,27 @@
 					        					<!--media goes here -->
 						        			</div>
 
-					        				<div class = "editorial-preview">
-					        					<h3>Featured Article</h3>
-					        					<img class = 'preview-image' src = './img/image1.jpg'>
-					        					<h4><b>Title</b></h4>
-					        					<p><span>Author</span><span>	|	</span><span>Date</span></p>
-					        					<p>Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text </p>
-					        					<p>Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text </p>
-					        					<p>Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text </p>
-					        					<p>Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text </p>
-					        				</div>									        				
+											<?php 
+						        				$query = "Select * from articles WHERE breaking = '0' AND genre = 'edit' ORDER BY id DESC LIMIT 4";
+												$result = mysqli_query($this->connection, $query);
+												$news = array();
+												while($row = $result->fetch_assoc()) {
+													$news[] = $row;
+													$data[] = $row['id'];
+													}			
+						        			?>
+						        				
+						        			<div class = "edit-news-home">
+						        				<h3>Editorials</h3>
+							        			<?php vertical_column($news);?>
+						        			</div>
+
+						        			<div class = "poll container-fluid">		
+							        			<script type="text/javascript" charset="utf-8" src="http://static.polldaddy.com/p/9451823.js"></script>
+												<noscript><a href="http://polldaddy.com/poll/9451823/">Who will win the 2016 U.S. presidential election?</a></noscript>
+											</div>
+
+					        										        				
 				        				</div>
 				        				<div class = "col-md-6 col-xs-12 top-pad big-pad">
 				        					<h3>Top News</h3>
@@ -357,7 +368,8 @@
 
 											$query = "Select * from articles WHERE staff = '1' ORDER BY id DESC LIMIT 3";
 											$result = mysqli_query($this->connection, $query);
-											display_media($result);
+											$staff_pick_html = display_media($result);
+											echo $staff_pick_html;
 
 
 				        					?>
@@ -423,7 +435,7 @@
 					}
 				}
 
-				$query = $query . ") ORDER BY id DESC LIMIT 5";
+				$query = $query . ") ORDER BY id DESC LIMIT 10";
 				$result = mysqli_query($this->connection, $query);
 				
 				$latestHtml = display_media($result);
