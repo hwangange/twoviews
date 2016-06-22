@@ -57,33 +57,3 @@
     </nav>
 
         <!-- Navigation -->
-
-   <!-- <script>
-        $(document).ready(function(){
-            $('#news-link').click(function() {
-                request = $.ajax({
-                    url: "genre.php",
-                    type: "POST",
-                    data: {genre: "News"}
-                });
-
-                // callback handler that will be called on success
-                request.done(function (response, textStatus, jqXHR){
-                    // log a message to the console
-                    console.log("Hooray, it worked!");
-                    window.location.href = "genre.php";
-                });
-
-                // callback handler that will be called on failure
-                request.fail(function (jqXHR, textStatus, errorThrown){
-                    // log the error to the console
-                    console.error(
-                        "The following error occured: "+
-                        textStatus, errorThrown
-                    );
-                });
-
-            });
-        });
-        
-    </script> -->

@@ -133,13 +133,13 @@
 
 							$uppercase = ucfirst($genre);
 							echo"
-									<div class = 'preview-article pretty-box' style = 'background-color: black'>							
+									<div class = 'preview-article pretty-box textfill' style = 'background-color: black'>							
 										<div class = 'hold-image'>
 											<img src = '$image'>
-										</div>
+										</div> 
 											<a href = 'genre.php?genre=$uppercase&page=1'><div class = 'genre' id = '$genreID'></div></a>
 											<br><br>
-											<div class = 'container'>
+											<div class = 'container text'>
 							        			<a href = 'article.php?id=$id'><h1>$title</h1></a>
 							        			<p><span>$author</span><span>	|	</span><span>$date</span></p>	
 						        			</div>

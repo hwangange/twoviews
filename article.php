@@ -19,4 +19,8 @@
 	    <!-- /.container -->
 	    <?php require "footer.php"; ?>
 	</body>
+	<script src = "js/jquery.textfill.min.js"></script>
+	<script>
+		$('.textfill').textfill();
+	</script>
 </html>

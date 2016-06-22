@@ -2,12 +2,21 @@
 	content: '3 .column.size-1of3';
 }
 
+#genreGrid[data-columns]::before {
+	content: '2 .column.size-1of2';
+}
+
 /* These are the classes that are going to be applied: */
 .column { float: left; }
 .size-1of3 { width: 33.333%; }
+.size-1of2 {width: 50%;}
 
 @media screen and (max-width: 480px){
 	#grid[data-columns]::before {
+		content: '1 .column.size-1of1';
+	}
+
+	#genreGrid[data-columns]::before {
 		content: '1 .column.size-1of1';
 	}
 }
@@ -16,12 +25,21 @@
 	#grid[data-columns]::before {
 		content: '2 .column.size-1of2';
 	}
+
+	#genreGrid[data-columns]::before {
+		content: '2 .column.size-1of2';
+	}
 }
 @media screen and (min-width: 769px) {
 	#grid[data-columns]::before {
 		content: '3 .column.size-1of3';
 	}
+
+	#genreGrid[data-columns]::before {
+		content: '2 .column.size-1of2';
+	}
 }
+
 
 /* Again, you’re free to use and define the classes: */
 .column { float: left; }

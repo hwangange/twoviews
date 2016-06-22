@@ -47,6 +47,7 @@ footer {
 
 .genre-entertainment {
 	background-color: pink;
+	color: black;
 }
 
 .genre-school {
@@ -60,6 +61,12 @@ footer {
 .genre-editorial {
 	color: black;
 	background-color: yellow;
+}
+
+/*********HEADER **************/
+
+#header-top {
+	background-color: white;
 }
 
 /*****HOME PAGE**************/
@@ -120,6 +127,12 @@ body { padding-top: 50px; }
 
 }
 
+.pretty-box a, .pretty-box .text {
+	position: relative;
+	z-index: 2;
+	color: white;
+}
+
 .hold-image img {	
 	position: absolute;
 	content: "";
@@ -129,11 +142,6 @@ body { padding-top: 50px; }
 	height: 100%:
 	z-index: -1;
 	display: block;
-}
-
-.pretty-box a, .pretty-box div {
-	position: relative;
-	z-index: 2;
 }
 
 /**************************************/
@@ -268,10 +276,38 @@ body { padding-top: 50px; }
 	margin-bottom: 2px;
 }
 
+.article-image {
+	width: auto;
+	height: auto;
+	display: block;
+	max-width: 100%;
+}
+
 /**********TAGS *********/
 .tag-img {
-	max-width: 200px;
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
 }
+
+/******GENRE *********/
+/*.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto; 
+    width: 100%;
+} */
 
 /*********STAFF*****/
 .person {

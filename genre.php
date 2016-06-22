@@ -52,7 +52,7 @@
 		<!-- Page Content -->
 	    <div class="container">
 
-	    	<h1 class = "hero-spacer"><?php echo $genre; ?></h1>
+	    	<h1 class = "hero-spacer" style = "text-align: center; padding: 20px"><b><?php echo $genre; ?></b></h1>
 
 	    	<?php require 'database/get-genre.php';?>    
 	   </div>

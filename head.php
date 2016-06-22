@@ -1,7 +1,7 @@
 <head>
-	<link href="css/main.css" rel="stylesheet" type='text/css'> <!--media="screen"-->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/salvattore.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet" type='text/css'> <!--media="screen"-->
 
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
