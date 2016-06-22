@@ -14,7 +14,7 @@
 	    		<div class = "col-md-3">
 	    			<img src = "img/staff/image1.jpg" class = "img-circle person centered-and-cropped">
 	    			<h4>Michael Lai</h4>
-	    			<p>Editor in Chief</p>
+	    			<p>Founder & Editor in Chief</p>
 	    		</div>
 	    		<div class = "col-md-3">
 	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
@@ -56,14 +56,14 @@
 	    			<h4>Suraj Rajendran</h4>
 	    			<p>Science & Technology News Editor</p>
 	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Brandon Smith</h4>
-	    			<p>US News Editor</p>
-	    		</div>
 	    	</div>
 	    	<h2>Coordinators</h2>
 	    	<div class = "row staff">
+	    		<div class = "col-md-3">
+	    			<img src = "img/staff/image1.jpg" class = "img-circle person centered-and-cropped">
+	    			<h4>Kerri Disalvatore</h4>
+	    			<p>Social Media Coordinator</p>
+	    		</div>
 	    		<div class = "col-md-3">
 	    			<img src = "img/staff/image1.jpg" class = "img-circle person centered-and-cropped">
 	    			<h4>Angela Hwang</h4>
@@ -71,18 +71,13 @@
 	    		</div>
 	    		<div class = "col-md-3">
 	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Andrea Naranjo</h4>
-	    			<p>Technology Coordinator</p>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person centered-and-cropped">
-	    			<h4>Kerri Disalvatore</h4>
+	    			<h4>Morgan James</h4>
 	    			<p>Social Media Coordinator</p>
 	    		</div>
 	    		<div class = "col-md-3">
 	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Morgan James</h4>
-	    			<p>Social Media Coordinator</p>
+	    			<h4>Andrea Naranjo</h4>
+	    			<p>Technology Coordinator</p>
 	    		</div>
 	    		<div class = "col-md-3">
 	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
@@ -93,31 +88,29 @@
 	    	<h2>Writers</h2>
 	    	<div class = "row staff">
 	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person centered-and-cropped">
-	    			<h4>Sierra Miral</h4>
-	    			<p>School Writer</p>
-	    		</div>
-	    		<div class = "col-md-3">
 	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
 	    			<h4>Sue Kim</h4>
-	    			<p>Staff Writer</p>
+	    		</div>
+	    		<div class = "col-md-3">
+	    			<img src = "img/staff/image1.jpg" class = "img-circle person centered-and-cropped">
+	    			<h4>Sierra Miral</h4>
 	    		</div>
 	    		<div class = "col-md-3">
 	    			<img src = "img/staff/image1.jpg" class = "img-circle person centered-and-cropped">
 	    			<h4>Reily Park</h4>
-	    			<p>Staff Writer</p>
+	    		</div>
+	    		<div class = "col-md-3">
+	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
+	    			<h4>Demi Shokry</h4>
 	    		</div>
 	    		<div class = "col-md-3">
 	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
 	    			<h4>Brandon Smith</h4>
-	    			<p>News Writer</p>
 	    		</div>
 	    	</div>
-	     
-
-
-		<?php require "footer.php"; ?>
+		
 	    </div>
 	    <!-- /.container -->
+	    <?php require "footer.php"; ?>
 	</body>
 </html>

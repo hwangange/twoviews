@@ -1,5 +1,6 @@
 <?php
 	require_once 'connection.php';
+	require 'display-media.php';
 
 	function truncate($text, $length, $id) {
 			$string = strip_tags($text);
@@ -40,43 +41,6 @@
 			$id = $news[$x]['id'];
 			echo "<li class = 'list-group-item'><a href = 'article.php?id=".$id."'>$title</a></li>";
 		}
-	}
-
-	function display_media($result) {
-		$returnString = "";
-		if(mysqli_num_rows($result)!=0){
-			$count = 0;
-			$length = mysqli_num_rows($result);	
-
-			while ($row = $result->fetch_assoc()) {
-				$id = $row['id'];
-				$title = $row['title'];
-				$image = $row['image'];
-				$date = $row['date'];
-
-				$returnString = $returnString . "<div class = 'media'>
-							<div class = 'media-left'>			
-								<a href='article.php?id=".$id."'><img class = 'media-object' src = '$image'></a>
-							</div>
-							<div class = 'media-body'>
-								<a href='article.php?id=".$id."'><h4 class = 'media-heading'>$title</h4></a>
-								<p>$date</p>
-							</div>
-						</div>";
-			}
-		}
-		return $returnString;
-	}
-
-	function array_unique_compact($a) {
-		 $tmparr = array_unique($a);
-		 $i=0;
-		 foreach ($tmparr as $v) {
-		   $newarr[$i] = $v;
-		   $i++;
-		 }
-		 return $newarr;
-
 	}
 
 	class home_articles {
@@ -173,7 +137,7 @@
 										<div class = 'hold-image'>
 											<img src = '$image'>
 										</div>
-											<a href = 'genre.php?genre=$uppercase'><div class = 'genre' id = '$genreID'></div></a>
+											<a href = 'genre.php?genre=$uppercase&page=1'><div class = 'genre' id = '$genreID'></div></a>
 											<br><br>
 											<div class = 'container'>
 							        			<a href = 'article.php?id=$id'><h1>$title</h1></a>
@@ -245,7 +209,7 @@
 														echo "
 															<div class = 'main-news'>
 									        					<img class = 'main-image' src = '$image'>
-									        					<h4>$title</h4>
+									        					<a href='article.php?id=".$id."'><h4>$title</h4></a>
 									        					<p>$string</p>
 									        				</div>
 														";
@@ -417,39 +381,7 @@
 					        					<?php vertical_column($news);?>
 					        				</div>
 
-					        				<div class = "tags">
-					        					<h3>Tags</h3>
-					        					<div class="panel panel-default">
-												  <div class="panel-body">
-						        				<?php
-						        					$tagRows = array();
-						        					$query = "SELECT * from articles";
-						        					$result = mysqli_query($this->connection, $query);
-						        					while($row = $result->fetch_assoc()) {
-						        						$tagRows = array_merge($tagRows, explode(',', $row['tags']));
-						        					}
-						        					$tagCount = array_count_values($tagRows);
-						        					$tagRows = array_unique_compact($tagRows);
-
-													$max = max($tagCount);
-													$min = min($tagCount);
-
-													$x = 18; // 18px
-													$y = 11; // 11px
-
-													$stepvalue = ($max - $min) / ($x - $y);	
-
-
-						        					 for($i=0;$i<count($tagRows);$i++)
-													 {
-													   echo '<a href="tags.php?tag='.$tagRows[$i].'" 
-													    style="font-size:'. ( $y + round( ($tagCount[$tagRows[$i]]-$min) / $stepvalue ) ).'px;">'. $tagRows[$i].'</a>';
-													   if($i<count($tagRows)-1) echo ",\n";
-													 }		
-						        				?>
-						        				 	</div> <!-- end panel-body -->
-												</div> <!-- end panel -->
-					        				</div>	
+					        				<?php require 'tag-list.php'; ?>
 					        				<a class="twitter-timeline" data-height="500" data-theme="light" href="https://twitter.com/TwoViewsPress">Tweets by TwoViewsPress</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>		       				
 				        				</div>
 				        			</div>

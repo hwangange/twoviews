@@ -12,8 +12,12 @@
 		}
 
 		public function find_articles(){
+			?>
+			<div class = "row">
+				<div class = "col-md-9">
+			<?php
 				$genre = $_SESSION['genre'];
-				$query = "Select * from articles WHERE genre LIKE '".$genre."' ORDER BY id DESC LIMIT 5";
+				$query = "Select * from articles WHERE genre LIKE '".$genre."' ORDER BY id";
 				$result = mysqli_query($this->connection, $query);
 
 				if(mysqli_num_rows($result)==0){
@@ -79,13 +83,18 @@
 			        			element.innerHTML += '$genre'.toUpperCase(); 
 			        		</script>";
 					}
-				} 
+				}
+				?>
+				</div> <!-- end col-md-9 -->
+				<div class = "article-sidebar col-md-3">
+					<?php require 'get-recent.php'; ?>
 
-				/*if(mysql_num_rows($result)) {
-					while($row = mysql_fetch_assoc($result)) {
-						$data['emp_info'][] = $row;
-					}
-				}*/
+		    		<?php require 'tag-list.php'; ?>
+
+
+	    		</div> <!-- end col-md-3 -->
+	    	</div> <!-- end row -->
+				<?php 
 
 				mysqli_close($this->connection);
 		}

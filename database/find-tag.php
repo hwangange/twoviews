@@ -12,6 +12,10 @@
 		}
 
 		public function find_articles(){
+			?> 
+			<div class = "row">
+				<div class = "col-md-9">
+			<?php
 				$tag = $_SESSION['tag'];
 				$query = "Select * from articles WHERE tags LIKE '%".$tag."%' ORDER BY id DESC LIMIT 5";
 				$result = mysqli_query($this->connection, $query);
@@ -79,14 +83,18 @@
 			        			element.innerHTML += '$genre'.toUpperCase(); 
 			        		</script>";
 					}
-				} 
+				}?> </div> <!--end col-md-9 -->
+				<div class = "col-md-3">
+					<?php require 'get-recent.php'; ?>
 
-				/*if(mysql_num_rows($result)) {
-					while($row = mysql_fetch_assoc($result)) {
-						$data['emp_info'][] = $row;
-					}
-				}*/
+		    		<?php require 'tag-list.php'; ?>
 
+
+	    		</div> <!-- end col-md-3 -->
+	    	</div> <!-- end row -->
+				<?php 
+
+				
 				mysqli_close($this->connection);
 		}
 
