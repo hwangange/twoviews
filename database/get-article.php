@@ -36,14 +36,18 @@
 						$genreID = 'genre'.$id;
 						$genreClass = 'genre-'.$genre;
 
-						$genre = strtoupper($genre);
+						$genreText = $genre;
+
+						if($genre == "edit") $genreText = "Editorial";
+						$genreText = strtoupper($genreText);
+
 
 						$tags = str_replace(' ', '', $tags);
 						$tagArray = explode(',', $tags);
 
 						echo"
 
-							<div class = 'genre $genreClass' id = '$genreID'>$genre</div>
+							<div class = 'genre $genreClass' id = '$genreID'>$genreText</div>
 							<h1>$title</h1>
 	    					<p><span>$author</span><span>	|	</span><span>$date</span></p>
 	    					<br>

@@ -102,12 +102,7 @@
 			$this->connection = $this->db->get_connection();
 		}
 
-		public function find_articles(){ ?>
-			<div class = "row">
-				<div class = "col-md-8">
-					<div class = "outer">
-						<div class = "middle">
-							
+		public function find_articles(){ ?>							
 
 		<?php
 			
@@ -121,33 +116,46 @@
 				}else{ 
 					$length = mysqli_num_rows($result);
 					$array = mysqli_fetch_all($result);
-					echo_breaking_news($array, 0); ?>
-							
-						</div>
-					</div>
-				</div> <!-- end col-md-8-->
-				<div class = "col-md-4"> 
+					if($length > 3) {
+						$start = array(3,4); ?>
+					<div class = "row">
+						<div class = "col-md-8">
+							<div class = "outer">
+								<div class = "middle">
 
+					<?php	echo_breaking_news($array, 0); ?>
+								
+							</div>
+						</div>
+					</div> <!-- end col-md-8-->
+					<div class = "col-md-4"> 
+
+					<?php
+						echo_breaking_news($array, 1);
+						echo_breaking_news($array, 2);
+					?>
+						
+					</div> <!-- end col-md-4-->
+				</div><!-- end row -->
+				<hr> 
 				<?php
-					echo_breaking_news($array, 1);
-					echo_breaking_news($array, 2);
+					} else {
+						$start = array(0,1);
+					}//end if, else there are more than 3 articles
+
 				?>
-					
-				</div> <!-- end col-md-4-->
-			</div><!-- end row -->
-			<hr>
 			<div class = "row">
 				<div class = "col-md-9">
 					<div class = "row">
 						<div class = "col-md-6">
 				<?php
-					$start = 3;
-					print_col_45($array, $length, $start);
+					
+					print_col_45($array, $length, $start[0]);
 				?>		</div><!--end col-md-6-->
 						<div class = "col-md-6">
 				<?php
-					$start = 4;
-					print_col_45($array, $length, $start);			
+					
+					print_col_45($array, $length, $start[1]);			
 				}
 				?>
 						</div> <!-- end col-md-6 -->
