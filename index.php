@@ -39,6 +39,24 @@
 	<script>
 		$width = $('.pretty-box').innerWidth() - 20;
 		$('.holdTitle').css({'width': $width});
+
+		$largestHeight = 0;
+		$(".column").each(function() {
+			$height = $(this).height();
+			if($height > $largestHeight)
+				$largestHeight = $height;
+		});
+
+		$(".column").each(function() {
+			$height = $(this).height();
+			$difference = $largestHeight - $height;
+			$equalDis = $difference/2;
+
+			$prettyHeight = $(this).find(".pretty-box").eq(0).height();
+			$(this).find(".pretty-box").eq(0).css({"height":$prettyHeight + $equalDis});
+			$prettyHeight = $(this).find(".pretty-box").eq(1).height();
+			$(this).find(".pretty-box").eq(1).css({"height":$prettyHeight + $equalDis});
+		});
 	</script>
 </html>
 
