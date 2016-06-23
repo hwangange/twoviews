@@ -12,18 +12,7 @@
 
 		<!-- Page Content -->
 	    <div class="container">
-	    	<div id="myCarousel" class="carousel slide hero-spacer" data-ride="carousel">
-			  <!-- Indicators -->
-			  <ol class="list-group col-sm-4">
-			    <li data-target="#myCarousel" data-slide-to="0" class="list-group-item active" id = "carousel-1"></li>
-			    <li data-target="#myCarousel" data-slide-to="1" class = "list-group-item" id = "carousel-2"></li>
-			    <li data-target="#myCarousel" data-slide-to="2" class = "list-group-item" id = "carousel-3"></li>
-			    <li data-target="#myCarousel" data-slide-to="3" class = "list-group-item" id = "carousel-4"></li>
-			    <li data-target="#myCarousel" data-slide-to="4" class = "list-group-item" id = "carousel-5"></li>
-			  </ol>
-
-			  <!-- Wrapper for slides -->
-			  <div class="carousel-inner">
+	    	
 			    
 
 	        <?php require 'database/get-home-articles.php'; ?>

@@ -1,9 +1,10 @@
 body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+   
 }
 
 .hero-spacer {
-    margin-top: 90px;
+    margin-top: 130px;
 }
 
 .hero-feature {
@@ -12,6 +13,10 @@ body {
 
 footer {
     margin: 50px 0;
+}
+
+a:hover, a:visited, a:link, a:active {
+	text-decoration: none;
 }
 
 .centered {
@@ -46,8 +51,7 @@ footer {
 }
 
 .genre-entertainment {
-	background-color: pink;
-	color: black;
+	background-color: #AA4069;
 }
 
 .genre-school {
@@ -59,8 +63,7 @@ footer {
 }
 
 .genre-edit {
-	color: black;
-	background-color: yellow;
+	background-color: #933709;
 }
 
 /*********HEADER **************/
@@ -68,6 +71,7 @@ footer {
 #header-top {
 	background-color: white;
 }
+
 
 /*****HOME PAGE**************/
 
@@ -92,6 +96,9 @@ body { padding-top: 50px; }
 	text-shadow:none;
 }
 
+#myCarousel .carousel-caption h2 a {
+	color: white;
+}
 #myCarousel .list-group {
 	position:absolute;
 	top:0;
@@ -103,6 +110,7 @@ body { padding-top: 50px; }
 }
 #myCarousel .list-group .active {
 	background-color:#eee;	
+	color: black;
 }
 
 @media (min-width: 992px) { 
@@ -332,10 +340,121 @@ body { padding-top: 50px; }
 
 /***************FOOTER**********/
 .footer {
-	background-color: black;
+	background-color: #2d5da1;
 	color: white;
 	margin: 0;
 	padding: 30px;
 	margin-top: 50px;
 }
 
+.social {
+	bottom: 0; 
+	right: 0;
+	position: absolute;
+	padding-right: 20px;
+}
+
+/*************NAVBAR ***************/
+.navbar-blue {
+  background-color: #2d5da1;
+  border-color: #1b3760;
+  color: white;
+}
+.navbar-blue .navbar-brand {
+  color: #fff;
+}
+.navbar-blue .navbar-brand:hover,
+.navbar-blue .navbar-brand:focus {
+  color: #fff;
+  background-color: transparent;
+}
+.navbar-blue .navbar-text {
+  color: #9d9d9d;
+}
+.navbar-blue .navbar-nav > li > a {
+  color: #fff;
+}
+.navbar-blue .navbar-nav > li > a:hover,
+.navbar-blue .navbar-nav > li > a:focus {
+  color: #fff;
+  background-color: #1b3760;
+}
+.navbar-blue .navbar-nav > .active > a,
+.navbar-blue .navbar-nav > .active > a:hover,
+.navbar-blue .navbar-nav > .active > a:focus {
+  color: #fff;
+  background-color: #1b3760; 
+}
+.navbar-blue .navbar-nav > .disabled > a,
+.navbar-blue .navbar-nav > .disabled > a:hover,
+.navbar-blue .navbar-nav > .disabled > a:focus {
+  color: #444;
+  background-color: transparent;
+}
+.navbar-blue .navbar-toggle {
+  border-color: #333;
+}
+.navbar-blue .navbar-toggle:hover,
+.navbar-blue .navbar-toggle:focus {
+  background-color: #333;
+}
+.navbar-blue .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
+.navbar-blue .navbar-collapse,
+.navbar-blue .navbar-form {
+  border-color: #101010;
+}
+.navbar-blue .navbar-nav > .open > a,
+.navbar-blue .navbar-nav > .open > a:hover,
+.navbar-blue .navbar-nav > .open > a:focus {
+  color: #fff;
+  background-color: #1b3760;
+}
+@media (max-width: 767px) {
+  .navbar-blue .navbar-nav .open .dropdown-menu > .dropdown-header {
+    border-color: #1b3760;
+  }
+  .navbar-blue .navbar-nav .open .dropdown-menu .divider {
+    background-color: #1b3760;
+  }
+  .navbar-blue .navbar-nav .open .dropdown-menu > li > a {
+    color: #fff;
+  }
+  .navbar-blue .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-blue .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #fff;
+    background-color: #1b3760;
+  }
+  .navbar-blue .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-blue .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-blue .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #fff;
+    background-color: #1b3760;
+  }
+  .navbar-blue .navbar-nav .open .dropdown-menu > .disabled > a,
+  .navbar-blue .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .navbar-blue .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #444;
+    background-color: transparent;
+  }
+}
+.navbar-blue .navbar-link {
+  color: #9d9d9d;
+}
+.navbar-blue .navbar-link:hover {
+  color: #fff;
+}
+.navbar-blue .btn-link {
+  color: #9d9d9d;
+}
+.navbar-blue .btn-link:hover,
+.navbar-blue .btn-link:focus {
+  color: #fff;
+}
+.navbar-blue .btn-link[disabled]:hover,
+fieldset[disabled] .navbar-blue .btn-link:hover,
+.navbar-blue .btn-link[disabled]:focus,
+fieldset[disabled] .navbar-blue .btn-link:focus {
+  color: #444;
+}

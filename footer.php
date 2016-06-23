@@ -1,21 +1,29 @@
 <footer class = "footer">
 	<hr>
 	<div class="row">
-		<div class="col-md-6">
-	     <h3>About Us</h3>
+		<div class="col-md-6" id = 'who-we-are'>
+	     <h3>Who We Are</h3>
 	     <p>Two Views is a student run online news service. We offer opinionated and sophisticated editorials, fresh perspectives on current events, and articles on the latest news.</p>
 	     <p>Copyright &copy; Two Views 2016</p>
 	   </div>
-	   <div class="col-md-3">
-	    <h3 style = "text-align: center; color: black">Keep in Touch!</h3>
-	   	<div class = "social-row row">
-	   		<div class = "col-lg-4"><a href = 'https://twitter.com/TwoViewsPress'><i class = "fa fa-3x fa-twitter-square social"></i></a></div>
-   			<div class = "col-lg-4"><a href = "https://facebook.com/TwoViewPress"><i class = "fa fa-3x fa-facebook-square social"></i></a></div>
-   			<div class  ="col-lg-4"><a href = "https://instagram.com"><i class = "fa fa-3x fa-instagram social"></i></a></div>
- 	     </div>
-	   </div>
-	   <div class = "col-md-3">
-	   	<img style = "margin-left: auto; margin-right: auto; display: block" src = "img/logo.jpg">
+	   <div class="col-md-6">
+	   		<div id = 'social-div' style = "border: none">
+	   			<div class = "social">
+
+		   			<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2FTwoViewPress&width=50&layout=button&action=like&show_faces=false&share=false&height=65&appId" width="50" height = "20" style = "border: none; overflow:hidden;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+				   
+					<a class="twitter-follow-button" href="https://twitter.com/TwoViewsPress" data-show-count = "false" data-show-screen-name = "false">Follow</a>
+				</div>
+				
+				
+			</div>
 	   </div>
 	</div>
+
 </footer>
+
+<script>
+	$footerHeight = $("#who-we-are").height();
+	$("#social-div").css({"height": $footerHeight});
+
+</script>

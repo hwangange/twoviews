@@ -60,7 +60,20 @@
 			$this->connection = $this->db->get_connection();
 		}
 
-		public function find_articles(){
+		public function find_articles(){ ?>
+			<div id="myCarousel" class="carousel slide hero-spacer" data-ride="carousel">
+			  <!-- Indicators -->
+			  <ol class="list-group col-sm-4">
+			    <li data-target="#myCarousel" data-slide-to="0" class="list-group-item active" id = "carousel-1"></li>
+			    <li data-target="#myCarousel" data-slide-to="1" class = "list-group-item" id = "carousel-2"></li>
+			    <li data-target="#myCarousel" data-slide-to="2" class = "list-group-item" id = "carousel-3"></li>
+			    <li data-target="#myCarousel" data-slide-to="3" class = "list-group-item" id = "carousel-4"></li>
+			    <li data-target="#myCarousel" data-slide-to="4" class = "list-group-item" id = "carousel-5"></li>
+			  </ol>
+
+			  <!-- Wrapper for slides -->
+			  <div class="carousel-inner">
+		<?php
 
 				//CAROUSEL
 				$query = "Select * from articles WHERE breaking = '1' ORDER by id DESC LIMIT 5";
@@ -79,7 +92,7 @@
 							echo "<div class='item active' id = '$id'>
 							      <img src= '$image' class = 'centered-and-cropped'>
 							      <div class='carousel-caption'>
-							        <a href = 'article.php?id=".$id."'<h3>$title</h3></a>
+							        <h2><a href = 'article.php?id=".$id."'>$title</a></h2>
 							        <p>$string</p>
 							      </div> 
 							   </div>";
@@ -87,7 +100,7 @@
 							echo "<div class='item' id = '$id'>
 							      <img src= '$image' class = 'centered-and-cropped'>
 							      <div class='carousel-caption'>
-							        <a href = 'article.php?id=".$id."'<h3>$title</h3></a>
+							        <h2><a href = 'article.php?id=".$id."'>$title</a></h2>
 							        <p>$string</p>
 							      </div> 
 							   </div>";
@@ -176,9 +189,13 @@
 
 				        			<div class = "row">
 				        				<div class = "col-md-3 col-xs-12 top-pad">
-				        					<div id = "latest">
+				        					<div>
 					        					<h3>Latest</h3>
-					        					<!--media goes here -->
+					        					<div class="panel panel-default">
+												  <div class="panel-body" id = "latest">
+												    <!--media goes here -->
+												  </div>
+												</div>
 						        			</div>
 
 											<?php 
@@ -353,6 +370,8 @@
 				        				</div>
 				        				<div class = "col-md-3 col-xs-12 top-pad">
 				        					<h3>Staff's Picks</h3>
+				        					<div class="panel panel-default">
+											  <div class="panel-body">
 				        					<?php
 
 											$query = "Select * from articles WHERE staff = '1' ORDER BY id DESC LIMIT 3";
@@ -362,7 +381,8 @@
 
 
 				        					?>
-
+				        						</div>
+											</div>
 				        					<?php 
 					        						$query = "Select * from articles WHERE breaking = '0' AND genre = 'school' ORDER BY id DESC LIMIT 4";
 													$result = mysqli_query($this->connection, $query);

@@ -39,6 +39,9 @@
 						$tags = $row['tags'];
 						$genreID = 'genre'.$id;
 
+						$genreText = $genre;
+						if($genre == "edit") { $genreText = "Editorial"; }
+
 						$string = strip_tags($text);
 
 						if (strlen($string) > 100) {
@@ -80,7 +83,7 @@
 			        		<script>
 			        			var element = document.getElementById('$genreID');
 			        			element.className += ' genre-' + '$genre';
-			        			element.innerHTML += '$genre'.toUpperCase(); 
+			        			element.innerHTML += '$genreText'.toUpperCase(); 
 			        		</script>";
 					}
 				}?> </div> <!--end col-md-9 -->
