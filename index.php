@@ -35,6 +35,11 @@
 
 	</body>
 	<script src="js/salvattore.js"></script>
+
+	<script>
+		$width = $('.pretty-box').innerWidth() - 20;
+		$('.holdTitle').css({'width': $width});
+	</script>
 </html>
 
 

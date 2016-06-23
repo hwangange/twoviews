@@ -2,13 +2,20 @@
 	require_once 'connection.php';
 	require 'display-media.php';
 
-	function truncate($text, $length, $id) {
-			$string = strip_tags($text);
+	function truncate_noId($text, $length) {
+		$string = strip_tags($text);
 
-			if (strlen($string) > $length) {
-			    $stringCut = substr($string, 0, $length);
-			    $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'... <a href="article.php?id='.$id.'">Read More</a>'; 
-			}
+		if (strlen($string) > $length) {
+		    $stringCut = substr($string, 0, $length);
+		    $string = substr($stringCut, 0, strrpos($stringCut, ' ')); 
+		}
+
+		return $string;
+	}
+
+	function truncate($text, $length, $id) {
+			$string = truncate_noId($text, $length);
+			$string = $string.'... <a href="article.php?id='.$id.'">Read More</a>';
 
 			return $string;
 	}
@@ -110,11 +117,13 @@
 				<?php
 
 				//PRETTY BOXES
-				echo "<div id = 'grid' data-columns>";
+				echo "
+					<div class = 'row'><div class = 'col-md-12'>
+					<div id = 'grid' data-columns>";
 				$count = 1;
 				$genres = array('1' => 'us', '2' => 'international', '3' => 'science', '4' =>'school', '5' => 'life', '6' => 'entertainment');
 				while($count < 7) {
-					$query = "Select * from articles WHERE breaking = '0' AND genre = '".$genres[strval($count)]."' ORDER BY id DESC LIMIT 1";
+					$query = "Select * from articles WHERE breaking = '0' AND genre = '".$genres[strval($count)]."' ORDER BY date DESC LIMIT 1";
 					$result = mysqli_query($this->connection, $query);
 					if(mysqli_num_rows($result)!=0){
 						
@@ -132,15 +141,16 @@
 							$genreID = 'genre'.$id;
 
 							$uppercase = ucfirst($genre);
+							//$title = truncate_noId($title, 100);
 							echo"
-									<div class = 'preview-article pretty-box textfill' style = 'background-color: black'>							
+									<div class = 'preview-article pretty-box' style = 'background-color: black'>							
 										<div class = 'hold-image'>
 											<img src = '$image'>
 										</div> 
 											<a href = 'genre.php?genre=$uppercase&page=1'><div class = 'genre' id = '$genreID'></div></a>
 											<br><br>
 											<div class = 'container text'>
-							        			<a href = 'article.php?id=$id'><h1>$title</h1></a>
+							        			<div class = 'holdTitle'><a href = 'article.php?id=$id'><h2>$title</h2></a></div>
 							        			<p><span>$author</span><span>	|	</span><span>$date</span></p>	
 						        			</div>
 		                         			<br><br>
@@ -149,6 +159,8 @@
 					        			var element = document.getElementById('$genreID');
 					        			element.className += ' genre-' + '$genre';
 					        			element.innerHTML += '$genre'.toUpperCase(); 
+
+
 					        		</script>";
 					        $data[] = $id;
 					        
@@ -159,6 +171,8 @@
 				     }
 				   ?>
 				        			</div> <!-- end grid -->
+				        			</div><!-- end col -->
+				        			</div><!-- end row-->
 
 				        			<div class = "row">
 				        				<div class = "col-md-3 col-xs-12 top-pad">
