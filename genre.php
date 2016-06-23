@@ -12,7 +12,7 @@
 	}
 
 	else if (strpos($genre, 'us') !== false || strpos($genre, 'united') !== false) {
-	    $genre = "US News"; 
+	    $genre = "U.S."; 
 	    $_SESSION["genre"] = "us";
 	}
 

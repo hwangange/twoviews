@@ -166,6 +166,7 @@
 					<?php require 'get-recent.php'; ?>
 
 		    		<?php require 'tag-list.php'; ?>
+		    		<a class="twitter-timeline" data-height="500" data-theme="light" href="https://twitter.com/TwoViewsPress">Tweets by TwoViewsPress</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 	    		</div> <!-- end col-md-3 -->
