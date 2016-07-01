@@ -184,8 +184,8 @@ body { padding-top: 50px; }
 }
 
 .media-object {
-	height: 50px;
 	width: 50px;
+	height: auto;
 	object-fit: cover;
 }
 
@@ -302,6 +302,8 @@ body { padding-top: 50px; }
 /**********TAGS *********/
 .tag-img {
 	width: 100%;
+	height: auto;
+	max-height: 500px;
 	margin-right: auto;
 	margin-left: auto;
 }

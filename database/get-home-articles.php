@@ -31,7 +31,7 @@
 			<li class = "list-group-item">
 				<div class = 'md-article'>
 					<img class = 'med-img-home' src = '<?php echo $image;?>' >
-					<h4><a href = "article.php?id=<?php echo $id;?>"><?php echo $title;?></a></h4>
+					<h4><b><a href = "article.php?id=<?php echo $id;?>"><?php echo $title;?></a></b></h4>
 					<p><?php echo $string;?></p>
 				</div>
  			</li>
@@ -235,12 +235,12 @@
 														$title = $row['title'];
 														$text = $row['text'];
 														$image = $row['image'];
-														$string = truncate($text, 100, $id);
+														$string = truncate($text, 150, $id);
 													
 														echo "
 															<div class = 'main-news'>
 									        					<img class = 'main-image' src = '$image'>
-									        					<a href='article.php?id=".$id."'><h4>$title</h4></a>
+									        					<h2><b><a href='article.php?id=".$id."'>$title</a></b></h2>
 									        					<p>$string</p>
 									        				</div>
 														";
@@ -318,7 +318,7 @@
 						        											<img class = "med-img-home" src = "<?php echo $image;?>">
 						        										</div>
 						        										<div class = "col-md-6">
-						        											<h4><a href = 'article.php?id=<?php echo $id;?>'><?php echo $title;?></a></h4>
+						        											<h4><b><a href = 'article.php?id=<?php echo $id;?>'><?php echo $title;?></a></b></h4>
 								        									<p><?php echo $string;?></p>
 						        										</div>
 						        									</div>
@@ -352,7 +352,7 @@
 						        								<div class = "md-article">
 						        									<div class = "row">
 						        										<div class = "col-md-6">
-						        											<h4><a href = 'article.php?id=<?php echo $id;?>'><?php echo $title;?></a></h4>
+						        											<h4><b><a href = 'article.php?id=<?php echo $id;?>'><?php echo $title;?></a></b></h4>
 								        									<p><?php echo $string;?></p>
 						        										</div>
 						        										<div class = "col-md-6">

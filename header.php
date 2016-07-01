@@ -1,7 +1,7 @@
 
     <nav class="navbar navbar-blue navbar-fixed-top" role="navigation">
         <div class = "container-fluid" style = "background-color: white" id = "header-top">
-            <a href = "index.php"><img style = "display: block; margin-left: auto; margin-right: auto; height: 90px; width: auto" src = "img/logo.jpg"></a>
+            <a href = "index.php"><img style = "display: block; margin-left: auto; margin-right: auto; height: 100px; width: auto" src = "img/logo-horizontal.jpg"></a>
         </div>
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
