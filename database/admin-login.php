@@ -5,7 +5,7 @@
   <?php require "config.php";?>
   <?php 
     session_start();
-    $conn = mysqli_connect(hostname, username, password, db_name) or die ("could not connect to mysql"); ?>
+    $conn = new mysqli(hostname, username, password, db_name) or die ("could not connect to mysql"); ?>
 </head>
 <body>
 	<div class = "container">
@@ -60,37 +60,40 @@
                 $_POST['registerUsername'] = addslashes($_POST['registerUsername']);
               }
 
-              $usercheck = $_POST['registerUsername'];
              
 
-              $sql = "SELECT * FROM login WHERE username = '$usercheck'";
-              $result = mysqli_query($conn, $sql);     
-              $existCount = mysqli_num_rows($result);
-              if($existCount != 0) { 
+              $stmt = $conn->prepare("SELECT * FROM login WHERE username = ?");
+              $stmt->bind_param("s", $usercheck);
+              $usercheck = $_POST['registerUsername'];
+              $stmt->execute();
+              $stmt->store_result();
+              $existCount = $stmt->num_rows;
+              if($existCount!=0) {
                 die('Sorry, the username '. $usercheck.' is already in use.');
               }
 
+              $stmt->close();
 
               $_POST['registerPassword'] = md5($_POST['registerPassword']);
               if(!get_magic_quotes_gpc()) {
-              	$_POST['registerName'] = addslashes($_POST['registerName']);
+                $_POST['registerName'] = addslashes($_POST['registerName']);
                 $_POST['registerPassword'] = addslashes($_POST['registerPassword']);
                 $_POST['registerUsername'] = addslashes($_POST['registerUsername']);
-             
-                $password = $_POST['registerPassword'];
-                $username = $_POST['registerUsername'];
-                $name = $_POST['registerName'];
               }
 
-              $sql = "INSERT INTO login (name, username, password)
-              VALUES ('$name', '$username', '$password')";
+              $stmt = $conn->prepare("INSERT INTO login (name, username, password)
+              VALUES (?, ?, ?)");
+              $stmt->bind_param("sss", $name, $username, $password);
+              $name = $_POST['registerName'];
+              $username = $_POST['registerUsername'];
+              $password = $_POST['registerPassword'];
+              $stmt->execute();
 
-              $result = mysqli_query($conn, $sql);
-              if ($result) {
-                  echo "<p style = 'margin-top: 5cm'>Thank you for registering.</p>";
-                  exit;
+              if($stmt) {
+                echo "<p style = 'margin-top: 5cm'>Thank you for registering.</p>";
+                $stmt->close(); 
               } else {
-                  echo "Error: " . $sql . "<br>" . $conn->error;
+                  echo "Error: " . $conn->error;
               }
 
               $conn->close();
@@ -105,29 +108,27 @@
                 $_POST['loginUsername'] = addslashes($_POST['loginUsername']);
               }
 
-              $username =  $_POST["loginUsername"];
-
               $_POST['loginPassword'] = md5($_POST['loginPassword']);
+
+              $stmt = $conn->prepare("SELECT name, username FROM login WHERE username = ? AND password = ?");
+              $stmt->bind_param("ss", $username, $password);
+              $username = $_POST["loginUsername"];
               $password = $_POST["loginPassword"];
-
-
-
-              $sql = "SELECT * FROM login WHERE username ='$username' AND password = '$password'";
-              $result = mysqli_query($conn, $sql);
-              $existCount = mysqli_num_rows($result);
-             
+              $stmt->execute();
+              $stmt->store_result();
+              $existCount = $stmt->num_rows;
+              var_dump("existCount: " . $existCount);
               if($existCount == 0) { 
                 die('Sorry, the username and password do not match.');
               } else {
-
-
-                $sql = "SELECT * FROM login WHERE username = '" . $username . "'";
-                $result = mysqli_query($conn, $sql);
-                /* fetch associative array */
-                $row = $result->fetch_row();
+                /* fetch  array */
+                 $stmt->bind_result($name, $username);
                 
-                $_SESSION['username'] = $username;
-                $_SESSION['name'] = $row[0];
+                while($stmt->fetch())
+                {
+                  $_SESSION['username'] = $username;
+                  $_SESSION['name'] = $name;
+                }
 
                 header('Location: admin.php');
                 exit;  

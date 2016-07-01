@@ -15,7 +15,7 @@
 	<?php require "admin-nav.php";?>
 	<div class = "container" style = "margin-top: 50px">
 		<p>Name: <?php echo $_SESSION['name'];?></p>
-		<p>Username: <?php echo $_SESSION['name'];?></p>
+		<p>Username: <?php echo $_SESSION['username'];?></p>
 	</div>
 </body>
 </html>
