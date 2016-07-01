@@ -35,6 +35,17 @@
 						$tags = $row['tags'];
 						$genreID = 'genre'.$id;
 						$genreClass = 'genre-'.$genre;
+						$finalText = "";
+
+						$output = str_replace(array("\r\n", "\r"), "\n", $text);
+						$lines = explode("\n", $output);
+						$new_lines = array();
+
+						foreach ($lines as $i => $line) {
+						    if(!empty($line))
+						        $new_lines[] = trim($line);
+						}
+						$finalText = $finalText . implode($new_lines);
 
 						$genreText = $genre;
 
@@ -56,7 +67,7 @@
 	    					<div id = 'article-text'>
 	    					<script>
 			        			var element = document.getElementById('article-text');
-			        			element.innerHTML += '$text'; 
+			        			element.innerHTML += '$finalText'; 
 			        		</script>
 			        		<br><br>
 			        		<span>Tags: </span>";
