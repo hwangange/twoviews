@@ -158,7 +158,7 @@
 							echo"
 									<div class = 'preview-article pretty-box' style = 'background-color: black'>							
 										<div class = 'hold-image'>
-											<img src = '$image'>
+											<img src = '$image' class = 'centered-and-cropped'>
 										</div> 
 											<a href = 'genre.php?genre=$uppercase&page=1'><div class = 'genre' id = '$genreID'></div></a>
 											<br><br>

@@ -42,9 +42,18 @@
 			$equalDis = $difference/2;
 
 			$prettyHeight = $(this).find(".pretty-box").eq(0).height();
+			$prettyWidth = $(this).find(".pretty-box").eq(0).width();
 			$(this).find(".pretty-box").eq(0).css({"height":$prettyHeight + $equalDis});
+
+			$(this).find(".pretty-box").find("img").eq(0).css({"width":$prettyWidth});
+			$(this).find(".pretty-box").find("img").eq(0).css({"height":$prettyHeight + $equalDis});
+
 			$prettyHeight = $(this).find(".pretty-box").eq(1).height();
+			$prettyWidth = $(this).find(".pretty-box").eq(1).width();
 			$(this).find(".pretty-box").eq(1).css({"height":$prettyHeight + $equalDis});
+
+			$(this).find(".pretty-box").find("img").eq(1).css({"width":$prettyWidth});
+			$(this).find(".pretty-box").find("img").eq(1).css({"height":$prettyHeight + $equalDis});
 		});
 	</script>
 </html>

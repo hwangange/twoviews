@@ -107,7 +107,7 @@
 		<?php
 			
 				$genre = $_SESSION['genre'];
-				$query = "Select * from articles WHERE genre LIKE '".$genre."' ORDER BY id";
+				$query = "Select * from articles WHERE genre LIKE '".$genre."' ORDER BY id DESC";
 				$result = mysqli_query($this->connection, $query);
 
 				if(mysqli_num_rows($result)==0){

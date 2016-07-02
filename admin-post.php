@@ -19,7 +19,7 @@
 	else {
 
 		$result = $conn->query("SELECT * FROM articles");
-		$idTemp = strval($result->num_rows + 1);
+		$idTemp = $result->num_rows + 1;
 		$dateTemp = strval($_POST['date']);
 		$result->close();
 
@@ -36,7 +36,7 @@
 
 		$sql = "INSERT INTO articles(id, title, author, date, text, image, genre, tags, breaking, staff, top) VALUES (?, ?, ?, CAST(? AS DATE), ?, ?, ?, ?, ?, ?, ?)";
 		if($stmt = $conn->prepare($sql)) { // assuming $conn is the connection
-		    $stmt->bind_param('ssssssssiii', $id, $title, $author, $date, $text, $image, $genre, $tags, $breaking, $staff, $top);
+		    $stmt->bind_param('isssssssiii', $id, $title, $author, $date, $text, $image, $genre, $tags, $breaking, $staff, $top);
 
 		    $id = $idTemp;
 		    $title = $_POST['title'];
@@ -69,7 +69,7 @@
 	function uploadImage($id) {
 			//define ('SITE_ROOT', realpath(dirname(__FILE__)));
 			
-		    $target_dir = "article_img/";
+		    $target_dir = "img/article_img/";
             $target_file = $target_dir . basename($_FILES["image"]["name"]);
 		  //  $target_file = SITE_ROOT.'/article_img/'.basename($_FILES["image"]["name"]);
             $uploadOk = 1;
@@ -85,7 +85,7 @@
                     $uploadOk = 1;
                     $ext = findexts($target_file);
                     //$new_target_file = SITE_ROOT.'/article_img/'.$id."_coverimg".".".$ext;
-                    $new_target_file = 'article_img/'.$id."_coverimg".".".$ext;
+                    $new_target_file = 'img/article_img/'.$id."_coverimg".".".$ext;
                     rename($target_file, $new_target_file);
                     //echo "New image name - " . basename($new_target_file);
                     $result = $new_target_file;

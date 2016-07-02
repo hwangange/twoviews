@@ -3,9 +3,9 @@
 <?php 
 	if(isset($_SESSION['genre'])) {
 		$genreSql = $_SESSION['genre'];
-		$query = "Select * from articles WHERE genre <> '" . $genreSql . "'ORDER BY date DESC LIMIT 7";
+		$query = "Select * from articles WHERE genre <> '" . $genreSql . "'ORDER BY id DESC LIMIT 7";
 	} else {
-		$query = "Select * from articles ORDER BY date DESC LIMIT 7";
+		$query = "Select * from articles ORDER BY id DESC LIMIT 7";
 	}
 
 	

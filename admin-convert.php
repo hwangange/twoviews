@@ -99,14 +99,14 @@
 				<div class="form-group col-md-6">
 				  <label for="genre">Genre:</label>
 				  <select class="form-control" name = "genre" id="genre">
-				    <option>U.S.</option>
-				    <option>Viral</option>
-				    <option>International</option>
-				    <option>Tech & Sciences</option>
-				    <option>Entertainment</option>
-				    <option>School</option>
-				    <option>Lifestyle & Health</option>
-				    <option>Editorials</option>
+				    <option value = "us">U.S.</option>
+				    <option value = "viral">Viral</option>
+				    <option value = "international">International</option>
+				    <option value = "science">Tech & Sciences</option>
+				    <option value = "entertainment">Entertainment</option>
+				    <option value = "school">School</option>
+				    <option value = "life">Lifestyle & Health</option>
+				    <option value = "edit">Editorials</option>
 				  </select>
 				</div>
 				<div class="form-group col-md-6">

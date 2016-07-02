@@ -62,7 +62,7 @@
 							<h1>$title</h1>
 	    					<p><span>$author</span><span>	|	</span><span>$date</span></p>
 	    					<br>
-	    					<img class = 'article-image' src = '$image'>
+	    					<img class = 'article-image centered' src = '$image'>
 	    					<br><br>
 	    					<div id = 'article-text'>
 	    					<script>
