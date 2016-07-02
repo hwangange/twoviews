@@ -13,14 +13,10 @@
 	    <div class="container">
 
 	    	
-	    			<?php require "database/get-article.php"; ?>
+	    			<?php require "get-article.php"; ?>
 
 	    </div>
 	    <!-- /.container -->
 	    <?php require "footer.php"; ?>
 	</body>
-	<script src = "js/jquery.textfill.min.js"></script>
-	<script>
-		$('.textfill').textfill();
-	</script>
 </html>

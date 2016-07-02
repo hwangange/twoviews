@@ -15,7 +15,7 @@
 	    	
 			    
 
-	        <?php require 'database/get-home-articles.php'; ?>
+	        <?php require 'get-home-articles.php'; ?>
 
 		
 	    </div>

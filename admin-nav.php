@@ -16,7 +16,7 @@
       <ul class="nav navbar-nav">
       	<li><a href="admin.php">Home</a></li>
         <li><a href="admin-convert.php">Post</a></li>
-        <li><a href="admin-edit.php">View Articles</a></li>
+        <li><a href="admin-edit.php">My Articles</a></li>
         <li><a href="admin-profile.php">Profile</a></li>
         <li><a href="admin-logout.php">Log Out</a></li>
       </ul>

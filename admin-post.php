@@ -69,7 +69,7 @@
 	function uploadImage($id) {
 			//define ('SITE_ROOT', realpath(dirname(__FILE__)));
 			
-		    $target_dir = "img/article_img/";
+		    $target_dir = "article_img/";
             $target_file = $target_dir . basename($_FILES["image"]["name"]);
 		  //  $target_file = SITE_ROOT.'/article_img/'.basename($_FILES["image"]["name"]);
             $uploadOk = 1;
@@ -85,7 +85,7 @@
                     $uploadOk = 1;
                     $ext = findexts($target_file);
                     //$new_target_file = SITE_ROOT.'/article_img/'.$id."_coverimg".".".$ext;
-                    $new_target_file = 'img/article_img/'.$id."_coverimg".".".$ext;
+                    $new_target_file = 'article_img/'.$id."_coverimg".".".$ext;
                     rename($target_file, $new_target_file);
                     //echo "New image name - " . basename($new_target_file);
                     $result = $new_target_file;

@@ -54,7 +54,7 @@
 
 	    	<h1 class = "hero-spacer" style = "text-align: center; padding: 20px"><b><?php echo $genre; ?></b></h1>
 
-	    	<?php require 'database/get-genre.php';?>    
+	    	<?php require 'get-genre.php';?>    
 	   </div>
 	    <!-- /.container -->
 	    <?php require "footer.php"; ?>

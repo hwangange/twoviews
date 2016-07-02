@@ -13,7 +13,7 @@
 	    <div class="container">
 	    	<h1 class = "hero-spacer">Tag: <?php echo $_SESSION["tag"]; ?></h1>
 	    	
-	    		<?php require 'database/find-tag.php';?>
+	    		<?php require 'find-tag.php';?>
 	    	
 
 	   

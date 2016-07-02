@@ -79,7 +79,7 @@
 	<div class = "container" style = "margin-top: 50px">
 		<h1>Post an Article</h1>
 
-	  	<form name = "articleForm" id = "articleForm" method = "post"  action = "admin-post.php">
+	  	<form name = "articleForm" id = "articleForm" method = "post"  action = "admin-post.php" enctype = "multipart/form-data">
 	  		<div class = "row">
 		  		<div class="form-group col-md-6">
 				  <label for="name">First and Last Name:</label>
