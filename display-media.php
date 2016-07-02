@@ -7,7 +7,7 @@
 
 			while ($row = $result->fetch_assoc()) {
 				$id = $row['id'];
-				$title = $row['title'];
+				$title = stripslashes($row['title']);
 				$image = $row['image'];
 				$date = $row['date'];
 

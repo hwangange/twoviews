@@ -22,9 +22,9 @@
 
 	function vertical_column($news) {
 		$id = $news[0]['id'];
-		$title = $news[0]['title'];
+		$title = stripslashes($news[0]['title']);
 		$image = $news[0]['image'];
-		$string = truncate($news[0]['text'], 50, $id);
+		$string = truncate(stripslashes($news[0]['text']), 50, $id);
 	?>
 
 		<ul class = 'list-group'>
@@ -44,7 +44,7 @@
 	function print_bottom_articles($news) {
 		$length = sizeof($news);
 		for($x = 1; $x < $length; $x++) {
-			$title = $news[$x]['title'];
+			$title = stripslashes($news[$x]['title']);
 			$id = $news[$x]['id'];
 			echo "<li class = 'list-group-item'><a href = 'article.php?id=".$id."'>$title</a></li>";
 		}
@@ -83,8 +83,8 @@
 					$length = mysqli_num_rows($result);
 					while ($row = $result->fetch_assoc()) {
 						$id = $row['id'];
-						$title = $row['title'];
-						$text = $row['text'];
+						$title = stripslashes($row['title']);
+						$text = stripslashes($row['text']);
 						$image = $row['image'];
 
 						$string = truncate($text, 40, $id);
@@ -144,13 +144,13 @@
 
 						while ($row = $result->fetch_assoc()) {
 							$id = $row['id'];
-							$title = $row['title'];
-							$author = $row['author'];
+							$title = stripslashes($row['title']);
+							$author = stripslashes($row['author']);
 							$date = $row['date'];
-							$text = $row['text'];
+							$text = stripslashes($row['text']);
 							$image = $row['image'];
 							$genre= $row['genre'];
-							$tags = $row['tags'];
+							$tags = stripslashes($row['tags']);
 							$genreID = 'genre'.$id;
 
 							$uppercase = ucfirst($genre);
@@ -232,8 +232,8 @@
 
 													while ($row = $result->fetch_assoc()) {
 														$id = $row['id'];
-														$title = $row['title'];
-														$text = $row['text'];
+														$title = stripslashes($row['title']);
+														$text = stripslashes($row['text']);
 														$image = $row['image'];
 														$string = truncate($text, 150, $id);
 													
@@ -304,9 +304,9 @@
 														}
 
 														$id = $news[0]['id'];
-														$title = $news[0]['title'];
+														$title = stripslashes($news[0]['title']);
 														$image = $news[0]['image'];
-														$string = truncate($news[0]['text'], 50, $id);
+														$string = truncate(stripslashes($news[0]['text']), 50, $id);
 						        					?>
 					        						<div class = "tech-news-home">
 					        							<h3>Tech & Sciences</h3>
@@ -340,9 +340,9 @@
 														}
 
 														$id = $news[0]['id'];
-														$title = $news[0]['title'];
+														$title = stripslashes($news[0]['title']);
 														$image = $news[0]['image'];
-														$string = truncate($news[0]['text'], 50, $id);
+														$string = truncate(stripslashes($news[0]['text']), 50, $id);
 						        					?>
 
 					        						<div class = "ent-news-home">

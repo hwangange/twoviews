@@ -4,13 +4,13 @@
 	function echo_stuff($array, $x) {
 		if($x < sizeof($array)) {
 			$id = $array[$x][0];
-			$title = $array[$x][1];
-			$author = $array[$x][2];
+			$title = stripslashes($array[$x][1]);
+			$author = stripslashes($array[$x][2]);
 			$date = $array[$x][3];
-			$text = $array[$x][4];
+			$text = stripslashes($array[$x][4]);
 			$image = $array[$x][5];
 			$genre= $array[$x][6];
-			$tags = $array[$x][7];
+			$tags = stripslashes($array[$x][7]);
 			$genreID = 'genre'.$id;
 
 			$string = strip_tags($text);
@@ -48,13 +48,13 @@
 	function echo_breaking_news($array, $x) {
 		if($x < sizeof($array)) {
 			$id = $array[$x][0];
-			$title = $array[$x][1];
-			$author = $array[$x][2];
+			$title = stripslashes($array[$x][1]);
+			$author = stripslashes($array[$x][2]);
 			$date = $array[$x][3];
-			$text = $array[$x][4];
+			$text = stripslashes($array[$x][4]);
 			$image = $array[$x][5];
 			$genre= $array[$x][6];
-			$tags = $array[$x][7];
+			$tags = stripslashes($array[$x][7]);
 			$genreID = 'genre'.$id;
 
 			$string = strip_tags($text);

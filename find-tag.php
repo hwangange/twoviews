@@ -30,13 +30,13 @@
 
 					while ($row = $result->fetch_assoc()) {
 						$id = $row['id'];
-						$title = $row['title'];
-						$author = $row['author'];
+						$title = stripslashes($row['title']);
+						$author = stripslashes($row['author']);
 						$date = $row['date'];
-						$text = $row['text'];
+						$text = stripslashes($row['text']);
 						$image = $row['image'];
 						$genre= $row['genre'];
-						$tags = $row['tags'];
+						$tags = stripslashes($row['tags']);
 						$genreID = 'genre'.$id;
 
 						$genreText = $genre;

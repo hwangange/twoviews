@@ -10,106 +10,36 @@
 
 	    	<h1 class = "hero-spacer">Our Staff</h1>
 	    	<h2>Editors</h2>
-	    	<div class = "row staff">
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person centered-and-cropped">
-	    			<h4>Michael Lai</h4>
-	    			<p>Founder & Editor in Chief</p>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Vivian Kim</h4>
-	    			<p>News Co-Editor</p>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Anika Prakash</h4>
-	    			<p>News Co-Editor</p>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Helen Chambers</h4>
-	    			<p>Lifestyle & Health News Editor</p>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Anusha Patil</h4>
-	    			<p>Lifestyle & Health News Editor</p>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Ellen Louks</h4>
-	    			<p>School News Editor</p>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Eva Rian</h4>
-	    			<p>Editorial Editor</p>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Phoebe Pannier</h4>
-	    			<p>Entertainment News Editor</p>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Suraj Rajendran</h4>
-	    			<p>Science & Technology News Editor</p>
+	    	<div class = "row">
+	    		<div class = "col-md-9">
+	    			<h5>Founder & Editor in Chief: Michael Lai</h5>
+	    			<h5>News Co-Editors: Vivian Kim, Anika Prakash</h5>
+	    			<h5>Lifestyle & Health News Editors: Helen Chambers, Anusha Patil</h5>    	
+	    			<h5>School News Editor: Ellen Louks</h5>    	
+	    			<h5>Editorial Editor: Eva Rian</h5>    		
+	    			<h5>Entertainment News Editor: Phoebe Pannier</h5>  		
+	    			<h5>Science & Technology News Editor: Suraj Rajendran</h5>
+	    		
+	    	
+	    			<h2>Coordinators</h2>
+	    			<h5>Social Media Coordinator: Kerri Disalvatore, Morgan James</h5>
+	    			<h5>Technology Coordinators: Angela Hwang, Andrea Naranjo</h5>
+	    			<h5>Artistic Design Coordinator: Nikki Orsolini</h5>
+	  
+	 
+	    			<h2>Writers</h2>
+	    			<h5>Sue Kim</h5>
+	    			<h5>Sierra Miral</h5>
+	    			<h5>Reily Park</h5>	  
+	    			<h5>Demi Shokry</h5>  
+	    			<h5>Brandon Smith</h5>
 	    		</div>
 	    	</div>
-	    	<h2>Coordinators</h2>
-	    	<div class = "row staff">
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person centered-and-cropped">
-	    			<h4>Kerri Disalvatore</h4>
-	    			<p>Social Media Coordinator</p>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person centered-and-cropped">
-	    			<h4>Angela Hwang</h4>
-	    			<p>Technology Coordinator</p>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Morgan James</h4>
-	    			<p>Social Media Coordinator</p>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Andrea Naranjo</h4>
-	    			<p>Technology Coordinator</p>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Nikki Orsolini</h4>
-	    			<p>Artistic Design Coordinator</p>
-	    		</div>
-	    	</div>
-	    	<h2>Writers</h2>
-	    	<div class = "row staff">
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Sue Kim</h4>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person centered-and-cropped">
-	    			<h4>Sierra Miral</h4>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person centered-and-cropped">
-	    			<h4>Reily Park</h4>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Demi Shokry</h4>
-	    		</div>
-	    		<div class = "col-md-3">
-	    			<img src = "img/staff/image1.jpg" class = "img-circle person">
-	    			<h4>Brandon Smith</h4>
-	    		</div>
-	    	</div>
-		
 	    </div>
+	  
+	 
+		
+	
 	    <!-- /.container -->
 	    <?php require "footer.php"; ?>
 	</body>
