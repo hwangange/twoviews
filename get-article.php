@@ -17,7 +17,7 @@
 	    		<div class = "col-md-9">
 			<?php
 				$session_id = $_SESSION["id"];
-				$query = "Select * from articles WHERE id = $session_id";
+				$query = "Select * from articles WHERE id = '$session_id'";
 				$result = mysqli_query($this->connection, $query);
 				if(mysqli_num_rows($result)!=0){
 					$count = 0;
@@ -65,10 +65,7 @@
 	    					<img class = 'article-image centered' src = '$image'>
 	    					<br><br>
 	    					<div id = 'article-text'>
-	    					<script>
-			        			var element = document.getElementById('article-text');
-			        			element.innerHTML += '$finalText'; 
-			        		</script>
+	    					$finalText
 			        		<br><br>
 			        		<span>Tags: </span>";
 				    	foreach($tagArray as $tag) {

@@ -72,15 +72,15 @@
 
 			if($x==0) {
 				echo "<div class = 'inner'>
-						<img class = 'tag-img' src = '$image'>
-								<a href = 'article.php?id=$id'><h1><b>$title</b></h1></a>
+						<img class = 'big-tag-img' src = '$image'>
+								<a href = 'article.php?id=$id'><h1 style = 'text-align: center'><b>$title</b></h1></a>
 				    </div>
 					<br>";
 			}
 
 			else echo " <div>					    			
 							<img class = 'tag-img' src = '$image'>
-							<a href = 'article.php?id=$id'><h3><b>$title</b></h3></a>
+							<a href = 'article.php?id=$id'><h3 style = 'text-align: center'><b>$title</b></h3></a>
 				    	</div>
 					    <br>";
 		}
@@ -107,7 +107,7 @@
 		<?php
 			
 				$genre = $_SESSION['genre'];
-				$query = "Select * from articles WHERE genre LIKE '".$genre."' ORDER BY id DESC";
+				$query = "Select * from articles WHERE genre LIKE '".$genre."' ORDER BY date DESC";
 				$result = mysqli_query($this->connection, $query);
 
 				if(mysqli_num_rows($result)==0){

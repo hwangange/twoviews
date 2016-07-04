@@ -299,6 +299,18 @@ body { padding-top: 50px; }
 	max-width: 100%;
 }
 
+/********* GENRE PAGE *****/
+.big-tag-img {
+	max-width: 100%;
+	width: auto;
+	height: auto;
+	
+	max-height: 700px;
+	margin-right: auto;
+	margin-left: auto;
+	display: block;
+}
+
 /**********TAGS *********/
 .tag-img {
 	width: 100%;

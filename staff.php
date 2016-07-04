@@ -16,9 +16,10 @@
 	    			<h5>News Co-Editors: Vivian Kim, Anika Prakash</h5>
 	    			<h5>Lifestyle & Health News Editors: Helen Chambers, Anusha Patil</h5>    	
 	    			<h5>School News Editor: Ellen Louks</h5>    	
-	    			<h5>Editorial Editor: Eva Rian</h5>    		
+	    			<h5>Editorial Editor: Sue Kim</h5>    		
 	    			<h5>Entertainment News Editor: Phoebe Pannier</h5>  		
 	    			<h5>Science & Technology News Editor: Suraj Rajendran</h5>
+	    			<h5>General Editor: Tabitha Escalante</h5>
 	    		
 	    	
 	    			<h2>Coordinators</h2>
@@ -28,11 +29,13 @@
 	  
 	 
 	    			<h2>Writers</h2>
-	    			<h5>Sue Kim</h5>
+	    			<h5>Stephanie Lai</h5>
+	    			<h5>Moya Leung</h5>
 	    			<h5>Sierra Miral</h5>
 	    			<h5>Reily Park</h5>	  
 	    			<h5>Demi Shokry</h5>  
 	    			<h5>Brandon Smith</h5>
+	    			<h5>Paisley Trent</h5>
 	    		</div>
 	    	</div>
 	    </div>

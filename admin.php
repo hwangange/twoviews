@@ -18,7 +18,7 @@
 		<h3><?php echo "Welcome, " . $_SESSION['name']; ?></h3>
 		<div class="list-group" style = "display: block; margin-left: auto; margin-right: auto">
 		  <a href="admin-convert.php" class="list-group-item">Post an Article</a>
-		  <a href="admin-edit.php" class="list-group-item">My Articles</a>
+		  <a href="admin-my-articles.php" class="list-group-item">My Articles</a>
 		  <a href="admin-profile.php" class = "list-group-item">Profile</a>
 		  <a href="admin-choose.php" class = "list-group-item">Select Staff's Picks/Breaking/Top News</a>
 		  <a href="admin-logout.php" class="list-group-item">Log out</a>
