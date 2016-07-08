@@ -1,40 +1,27 @@
 <?php
-	require_once 'connection.php';
-	require_once 'display-media.php';
-	class article {
-
-		private $db;
-		private $connection;
-
-		function __construct(){
-			$this->db = new DB_Connection();
-			$this->connection = $this->db->get_connection();
-		}
-
-		public function find_article(){
+	
+	require "config.php";
+	$conn = new mysqli(hostname, username, password, db_name) or die ("could not connect to mysql");
+	
 			?>
 			<div class = "row hero-spacer">
 	    		<div class = "col-md-9">
 			<?php
-				$session_id = $_SESSION["id"];
-				$query = "Select * from articles WHERE id = '$session_id'";
-				$result = mysqli_query($this->connection, $query);
-				if(mysqli_num_rows($result)!=0){
-					$count = 0;
-					$length = mysqli_num_rows($result);
-					$data = array('success' => 'Results found.', 'length' => $length);
 
-					while ($row = $result->fetch_assoc()) {
-						$id = $row['id'];
-						$title = stripslashes($row['title']);
-						$author = stripslashes($row['author']);
-						$date = $row['date'];
-						$text = stripslashes($row['text']);
-						$image = $row['image'];
-						$genre= $row['genre'];
-						$tags = stripslashes($row['tags']);
-						$genreID = 'genre'.$id;
+				$sql = "SELECT title, author, date, text, image, genre, tags FROM articles WHERE id = ?";
+				if($stmt = $conn->prepare($sql)) { // assuming $conn is the connection
+			   		$stmt->bind_param('s', $id);
+			   		$id = $_GET['id'];
+				    $stmt->execute();
+				    $stmt->store_result();
+				    $stmt->bind_result($title, $author, $date, $text, $image, $genre, $tags);
+				    
+				    while($stmt->fetch()) {
+						$title = stripslashes($title);
+						$text = stripslashes($text);
+						$tags = stripslashes($tags); 
 						$genreClass = 'genre-'.$genre;
+
 						$finalText = "";
 
 						$output = str_replace(array("\r\n", "\r"), "\n", $text);
@@ -56,25 +43,36 @@
 						$tags = str_replace(' ', '', $tags);
 						$tagArray = explode(',', $tags);
 
-						echo"
-
-							<div class = 'genre $genreClass' id = '$genreID'>$genreText</div>
-							<h1>$title</h1>
-	    					<p><span>$author</span><span>	|	</span><span>$date</span></p>
+						?>
+							<div class = 'genre <?php echo $genreClass;?>'><?php echo $genreText; ?></div>
+							<h1><?php echo $title;?></h1>
+	    					<p><span><?php echo $author; ?></span><span>	|	</span><span><?php echo $date; ?></span></p>
 	    					<br>
-	    					<img class = 'article-image centered' src = '$image'>
-	    					<br><br>
-	    					<div id = 'article-text'>
-	    					$finalText
-			        		<br><br>
-			        		<span>Tags: </span>";
-				    	foreach($tagArray as $tag) {
-				    		echo "<a href = 'tags.php?tag=$tag'><span>$tag</span></a>	";
-				    	}
-			        	echo "
-							</div>";
+
+		    			<?php	if(substr($image, 0, 3) == 'img') {
+		    					echo "<img class = 'article-image centered' src = '$image'>";
+		    				}
+		    				
+		    				else echo $image;
+
+		    			?>	<br><br>
+		    					<div id = 'article-text'>
+		    					<?php echo $finalText;?>
+				        		<br><br>
+				        		<span>Tags: </span>
+				        <?php
+					    	foreach($tagArray as $tag) {
+					    		echo "<a href = 'tags.php?tag=$tag'><span>$tag</span></a>	";
+					    	}
+				        	echo "
+								</div>";
+
+						
 					}
-				} ?>
+				} else { echo "Could not prepare statement.";}
+
+
+	 ?>
 
 					<div id="disqus_thread"></div>
 					<script>
@@ -112,18 +110,8 @@
 			</div> <!--end row -->
 
 				<?php 
+				$stmt->close();
+				$conn->close();
 
-				mysqli_close($this->connection);
-		}
-
-	}
-?>
-
-<?php
-
-	$article = new article();
-	$data = array();	
-	$article -> find_article();
-		
 ?>
 

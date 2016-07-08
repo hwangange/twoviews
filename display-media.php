@@ -1,16 +1,9 @@
 <?php
-	function display_media($result) {
+	function display_media($id, $title, $image, $date) {
 		$returnString = "";
-		if(mysqli_num_rows($result)!=0){
-			$count = 0;
-			$length = mysqli_num_rows($result);	
-
-			while ($row = $result->fetch_assoc()) {
-				$id = $row['id'];
-				$title = stripslashes($row['title']);
-				$image = $row['image'];
-				$date = $row['date'];
-
+		
+			
+			 
 				$returnString = $returnString . "<div class = 'media'>
 							<div class = 'media-left'>			
 								<a href='article.php?id=".$id."'><img class = 'media-object' src = '$image'></a>
@@ -20,8 +13,8 @@
 								<p>$date</p>
 							</div>
 						</div>";
-			}
-		}
+			
+		
 		return $returnString;
 	}
 ?>

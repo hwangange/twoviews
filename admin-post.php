@@ -6,13 +6,12 @@
 	}
 	require "config.php";
 	$conn = new mysqli(hostname, username, password, db_name) or die ("could not connect to mysql");
-	if(!($_POST['name']) || !($_POST['date']) || !($_POST['title']) || !($_POST['genre']) || !($_POST['tags']) || !($_FILES['image']) || !($_POST['article'])) {
+	if(!($_POST['name']) || !($_POST['date']) || !($_POST['title']) || !($_POST['genre']) || !($_POST['tags']) || !($_FILES['image'] || $_POST['video']) || !($_POST['article'])) {
 		echo "Name: ".$_POST['name'];
 		echo "Date: ".$_POST['date'];
 		echo "Title:  ".$_POST['title'];
 		echo "Genre: ".$_POST['genre'];
 		echo "Tags: ".$_POST['tags'];
-		
 		echo "article: ".$_POST['article'];
 		echo "Incomplete.";
 	}
@@ -43,7 +42,8 @@
 		    $author = $_POST['name'];
 			$date = $dateTemp;
 			$text = $_POST['article'];
-			$image = uploadImage($id); 
+			if($_FILES['image']) { $image = "image " . uploadImage($id);  }
+			else if(!($_FILES['image']) && ($_POST['video'])) { $image = "video " . $_POST['video']; }
 			$genre = $_POST['genre'];
 			$tags = $_POST['tags'];
 			$breaking = 0;

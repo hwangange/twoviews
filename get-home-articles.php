@@ -1,5 +1,6 @@
 <?php
-	require_once 'connection.php';
+	require "config.php";
+	$conn = new mysqli(hostname, username, password, db_name) or die ("could not connect to mysql");
 	require 'display-media.php';
 
 	function truncate_noId($text, $length) {
@@ -50,17 +51,7 @@
 		}
 	}
 
-	class home_articles {
-
-		private $db;
-		private $connection;
-
-		function __construct(){
-			$this->db = new DB_Connection();
-			$this->connection = $this->db->get_connection();
-		}
-
-		public function find_articles(){ ?>
+	?>
 			<div id="myCarousel" class="carousel slide hero-spacer" data-ride="carousel">
 			  <!-- Indicators -->
 			  <ol class="list-group col-sm-4">
@@ -74,20 +65,19 @@
 			  <!-- Wrapper for slides -->
 			  <div class="carousel-inner">
 		<?php
+			$data = array();
 
 				//CAROUSEL
-				$query = "Select * from articles WHERE breaking = '1' ORDER by id DESC LIMIT 5";
-				$result = mysqli_query($this->connection, $query);
-				if(mysqli_num_rows($result)!=0){
-					$count = 1;
-					$length = mysqli_num_rows($result);
-					while ($row = $result->fetch_assoc()) {
-						$id = $row['id'];
-						$title = stripslashes($row['title']);
-						$text = stripslashes($row['text']);
-						$image = $row['image'];
-
-						$string = truncate($text, 40, $id);
+				$sql = "Select id, title, text, image from articles WHERE breaking = '1' ORDER by id DESC LIMIT 5";
+				if($stmt = $conn->prepare($sql)) {
+					$stmt->execute();
+			   		$stmt->store_result();
+				    $stmt->bind_result($id, $title, $text, $image);
+				    $count = 1;
+				    while($stmt->fetch()) {
+				    	$title = stripslashes($title);
+				    	$text = stripslashes($text);
+				    	$string = truncate($text, 40, $id);
 						if($count==1) {
 							echo "<div class='item active' id = '$id'>
 							      <img src= '$image' class = 'centered-and-cropped'>
@@ -107,12 +97,14 @@
 						}
 
 
-							echo "<script> var element = document.getElementById('carousel-".$count."');
+						echo "<script> var element = document.getElementById('carousel-".$count."');
 				        			element.innerHTML += '<h3>".$title."</h3>';</script>";
 				        $count = $count + 1;
 				        $data[] = $id;
-					}
-				} ?>
+
+				    }
+				}
+?>
 					</div><!-- end carousel-inner-->
 					<div class = "carousel-controls">
 					  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -136,24 +128,21 @@
 				$count = 1;
 				$genres = array('1' => 'us', '2' => 'international', '3' => 'science', '4' =>'school', '5' => 'life', '6' => 'entertainment');
 				while($count < 7) {
-					$query = "Select * from articles WHERE breaking = '0' AND genre = '".$genres[strval($count)]."' ORDER BY date DESC LIMIT 1";
-					$result = mysqli_query($this->connection, $query);
-					if(mysqli_num_rows($result)!=0){
-						
-						$length = mysqli_num_rows($result);
+					$sql = "Select id, title, author, date, text, image, genre, tags from articles WHERE breaking = '0' AND genre = ? ORDER BY date DESC LIMIT 1";
+					if($stmt = $conn->prepare($sql)) {
+						$stmt->bind_param('s', $genre);
+						$genre = $genres[strval($count)];
+						$stmt->execute();
+				   		$stmt->store_result();
+					    $stmt->bind_result($id, $title, $author, $date, $text, $image, $genre, $tags);
+					    while($stmt->fetch()) {
+					    	$genreID = 'genre'.$id;
+					    	$title = stripslashes($title);
+					    	$author = stripslashes($author);
+					    	$text = stripslashes($text);
+					    	$tags = stripslashes($tags);
 
-						while ($row = $result->fetch_assoc()) {
-							$id = $row['id'];
-							$title = stripslashes($row['title']);
-							$author = stripslashes($row['author']);
-							$date = $row['date'];
-							$text = stripslashes($row['text']);
-							$image = $row['image'];
-							$genre= $row['genre'];
-							$tags = stripslashes($row['tags']);
-							$genreID = 'genre'.$id;
-
-							$uppercase = ucfirst($genre);
+					    	$uppercase = ucfirst($genre);
 							//$title = truncate_noId($title, 100);
 							echo"
 									<div class = 'preview-article pretty-box' style = 'background-color: black'>							
@@ -181,7 +170,9 @@
 					       }
 					      }
 					      $count = $count + 1;
-				     }
+				}
+
+					
 				   ?>
 				        			</div> <!-- end grid -->
 				        			</div><!-- end col -->
@@ -199,13 +190,19 @@
 						        			</div>
 
 											<?php 
-						        				$query = "Select * from articles WHERE breaking = '0' AND genre = 'edit' ORDER BY id DESC LIMIT 4";
-												$result = mysqli_query($this->connection, $query);
 												$news = array();
-												while($row = $result->fetch_assoc()) {
-													$news[] = $row;
-													$data[] = $row['id'];
-													}			
+						        				$sql = "Select * from articles WHERE breaking = '0' AND genre = 'edit' ORDER BY date DESC LIMIT 4";
+						        				if($stmt = $conn->prepare($sql)) {
+													$stmt->execute();
+												    $result = $stmt->get_result();
+													while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+													  
+													    $news[] = $row;
+													    $data[] = $row["id"];  
+													  	
+													}
+
+												}			
 						        			?>
 						        				
 						        			<div class = "edit-news-home">
@@ -224,13 +221,11 @@
 				        					<h3>Top News</h3>
 
 				        					<?php
-				        						$query = "Select * from articles WHERE breaking = '0' AND top = '1' ORDER BY id DESC LIMIT 1";
-												$result = mysqli_query($this->connection, $query);
-												if(mysqli_num_rows($result)!=0){
-													
-													$length = mysqli_num_rows($result);
-
-													while ($row = $result->fetch_assoc()) {
+				        						$sql = "Select * from articles WHERE breaking = '0' AND top = '1' ORDER BY id DESC LIMIT 1";
+				        						if($stmt = $conn->prepare($sql)) {
+													$stmt->execute();
+												    $result = $stmt->get_result();
+													while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 														$id = $row['id'];
 														$title = stripslashes($row['title']);
 														$text = stripslashes($row['text']);
@@ -254,12 +249,16 @@
 					        				<hr>
 
 					        				<?php 
-					        					$query = "Select * from articles WHERE breaking = '0' AND genre = 'us' ORDER BY id DESC LIMIT 4";
-												$result = mysqli_query($this->connection, $query);
+					        					$sql = "Select * from articles WHERE breaking = '0' AND genre = 'us' ORDER BY id DESC LIMIT 4";
+												
 												$news = array();
-												while($row = $result->fetch_assoc()) {
-													$news[] = $row;
-													$data[] = $row['id'];
+												if($stmt = $conn->prepare($sql)) {
+													$stmt->execute();
+												    $result = $stmt->get_result();
+													while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+														$news[] = $row;
+														$data[] = $row['id'];
+													}
 												}			
 					        				?>
 
@@ -272,14 +271,17 @@
 					        					</div>
 
 					        					<?php 
-					        						$query = "Select * from articles WHERE breaking = '0' AND genre = 'international' ORDER BY id DESC LIMIT 4";
-													$result = mysqli_query($this->connection, $query);
-													unset($news);
-													$news = array();
-													while($row = $result->fetch_assoc()) {
+					        					$sql = "Select * from articles WHERE breaking = '0' AND genre = 'international' ORDER BY id DESC LIMIT 4";
+												
+												$news = array();
+												if($stmt = $conn->prepare($sql)) {
+													$stmt->execute();
+												    $result = $stmt->get_result();
+													while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 														$news[] = $row;
 														$data[] = $row['id'];
 													}
+												}
 					        					?>
 
 
@@ -294,14 +296,18 @@
 					        					<div class = "col-md-12">
 
 						        					<?php 
-						        						$query = "Select * from articles WHERE breaking = '0' AND genre = 'science' ORDER BY id DESC LIMIT 4";
-														$result = mysqli_query($this->connection, $query);
-														unset($news);
-														$news = array();
-														while($row = $result->fetch_assoc()) {
+						        					$sql = "Select * from articles WHERE breaking = '0' AND genre = 'science' ORDER BY id DESC LIMIT 4";
+													unset($news);
+													$news = array();
+													if($stmt = $conn->prepare($sql)) {
+														$stmt->execute();
+													    $result = $stmt->get_result();
+														while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 															$news[] = $row;
 															$data[] = $row['id'];
 														}
+													}
+						        			
 
 														$id = $news[0]['id'];
 														$title = stripslashes($news[0]['title']);
@@ -330,14 +336,18 @@
 					        					</div>
 					        					<div class = "col-md-12">
 					        						<?php 
-						        						$query = "Select * from articles WHERE breaking = '0' AND genre = 'entertainment' ORDER BY id DESC LIMIT 4";
-														$result = mysqli_query($this->connection, $query);
-														unset($news);
-														$news = array();
-														while($row = $result->fetch_assoc()) {
+
+					        						$sql = "Select * from articles WHERE breaking = '0' AND genre = 'entertainment' ORDER BY id DESC LIMIT 4";
+													unset($news);
+													$news = array();
+													if($stmt = $conn->prepare($sql)) {
+														$stmt->execute();
+													    $result = $stmt->get_result();
+														while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 															$news[] = $row;
 															$data[] = $row['id'];
 														}
+													}
 
 														$id = $news[0]['id'];
 														$title = stripslashes($news[0]['title']);
@@ -374,24 +384,34 @@
 											  <div class="panel-body">
 				        					<?php
 
-											$query = "Select * from articles WHERE staff = '1' ORDER BY id DESC LIMIT 3";
-											$result = mysqli_query($this->connection, $query);
-											$staff_pick_html = display_media($result);
-											echo $staff_pick_html;
-
-
+				        					$sql = "Select * from articles WHERE staff = '1' ORDER BY date DESC LIMIT 3";
+											unset($news);
+											$news = array();
+											if($stmt = $conn->prepare($sql)) {
+												$stmt->execute();
+											    $result = $stmt->get_result();
+												while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+													$staff_pick_html = display_media($row['id'], $row['title'], $row['image'], $row['date']);
+													echo $staff_pick_html;
+												}
+											}
 				        					?>
 				        						</div>
 											</div>
 				        					<?php 
-					        						$query = "Select * from articles WHERE breaking = '0' AND genre = 'school' ORDER BY id DESC LIMIT 4";
-													$result = mysqli_query($this->connection, $query);
-													unset($news);
-													$news = array();
-													while($row = $result->fetch_assoc()) {
-														$news[] = $row;
-														$data[] = $row['id'];
-													}
+
+				        					$sql = "Select * from articles WHERE breaking = '0' AND genre = 'school' ORDER BY id DESC LIMIT 4";							
+				        					unset($news);
+											$news = array();
+											if($stmt = $conn->prepare($sql)) {
+												$stmt->execute();
+											    $result = $stmt->get_result();
+												while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+													$news[] = $row;
+													$data[] = $row['id'];
+												}
+											}
+
 					        				?>
         					
 					        				<div class = "school-news-home">
@@ -400,13 +420,16 @@
 					        				</div>
 
 					        				<?php 
-					        						$query = "Select * from articles WHERE breaking = '0' AND genre = 'life' ORDER BY id DESC LIMIT 4";
-													$result = mysqli_query($this->connection, $query);
+					   								$sql = "Select * from articles WHERE breaking = '0' AND genre = 'life' ORDER BY id DESC LIMIT 4";
 													unset($news);
 													$news = array();
-													while($row = $result->fetch_assoc()) {
-														$news[] = $row;
-														$data[] = $row['id'];
+													if($stmt = $conn->prepare($sql)) {
+														$stmt->execute();
+													    $result = $stmt->get_result();
+														while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+															$news[] = $row;
+															$data[] = $row['id'];
+														}
 													}
 					        				?>
         					
@@ -428,19 +451,27 @@
 
 				     <?php   
 				//Display LATEST articles
-				$query = "Select * from articles WHERE breaking = '0' AND staff = '0' AND top = '0' AND id NOT IN(";
+				$sql = "Select * from articles WHERE breaking = '0' AND staff = '0' AND top = '0' AND id NOT IN(";
 
 				for($x = 0; $x < sizeof($data); $x++) {
-					$query = $query . "'" . $data[$x] . "'";
+					$sql = $sql . "'" . $data[$x] . "'";
 					if($x != sizeof($data)-1) {
-						$query = $query . ", ";
+						$sql = $sql . ", ";
 					}
 				}
 
-				$query = $query . ") ORDER BY id DESC LIMIT 10";
-				$result = mysqli_query($this->connection, $query);
+				$sql = $sql . ") ORDER BY id DESC LIMIT 10";
+
+				$latestHtml = "";
+				if($stmt = $conn->prepare($sql)) {
+					$stmt->execute();
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+						$news[] = $row;
+						$latestHtml.=display_media($row['id'], $row['title'], $row['image'], $row['date']);
+					}
+				}		
 				
-				$latestHtml = display_media($result);
 				?>
 				
 				<script> 
@@ -449,17 +480,10 @@
 					latest.innerHTML+= string; </script>;
 				<?php
 
-				mysqli_close($this->connection);
-		} //find articles method
-
-	} //home articles class
+				$conn->close();
+	
 ?>
 
 
-<?php
 
-	$home_articles = new home_articles();	
-	$data = array(); //used articles
-	$home_articles -> find_articles();
-?>
 

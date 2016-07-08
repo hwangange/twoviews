@@ -1,53 +1,35 @@
 <?php
-	require_once 'connection.php';
+	require "config.php";
+	$conn = new mysqli(hostname, username, password, db_name) or die ("could not connect to mysql");
 
-	class tag_articles {
-
-		private $db;
-		private $connection;
-
-		function __construct(){
-			$this->db = new DB_Connection();
-			$this->connection = $this->db->get_connection();
-		}
-
-		public function find_articles(){
+	
 			?> 
 			<div class = "row">
 				<div class = "col-md-9">
 			<?php
-				$tag = $_SESSION['tag'];
-				$query = "Select * from articles WHERE tags LIKE '%".$tag."%' ORDER BY id DESC LIMIT 5";
-				$result = mysqli_query($this->connection, $query);
-
-				if(mysqli_num_rows($result)==0){
-					$data = array('empty' => 'No results found.');
-							//$json['empty'] = 'No results found.';
-				}else{
-					$count = 0;
-					$length = mysqli_num_rows($result);
-					$data = array('success' => 'Results found.', 'length' => $length);
-
-					while ($row = $result->fetch_assoc()) {
-						$id = $row['id'];
-						$title = stripslashes($row['title']);
-						$author = stripslashes($row['author']);
-						$date = $row['date'];
-						$text = stripslashes($row['text']);
-						$image = $row['image'];
-						$genre= $row['genre'];
-						$tags = stripslashes($row['tags']);
-						$genreID = 'genre'.$id;
+				$sql = "SELECT id, title, author, date, text, image, genre, tags FROM articles WHERE tags LIKE ? ORDER BY date DESC LIMIT 10";
+				if($stmt = $conn->prepare($sql)) { // assuming $conn is the connection
+			   		$stmt->bind_param('s', $tag);
+			   		$tag = "%{$_SESSION['tag']}%";
+			   		$stmt->execute();
+			   		$stmt->store_result();
+				    $length = $stmt->num_rows;
+				    $stmt->bind_result($id, $title, $author, $date, $text, $image, $genre, $tags);
+				    while($stmt->fetch()) {
+				    	$title = stripslashes($title);
+						$author = stripslashes($author);
+						$text = stripslashes($text);
+						$tags = stripslashes($tags);
 
 						$genreText = $genre;
 						if($genre == "edit") { $genreText = "Editorial"; }
 
 						$string = strip_tags($text);
 
-						if (strlen($string) > 100) {
+						if (strlen($string) > 300) {
 
 						    // truncate string
-						    $stringCut = substr($string, 0, 100);
+						    $stringCut = substr($string, 0, 300);
 
 						    // make sure it ends in a word so assassinate doesn't become ass...
 						    $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'<br><a href="article.php?id='.$id.'">Read More</a>'; 
@@ -59,7 +41,7 @@
 
 
 						echo "
-							<div> <div class = 'genre' id = '$genreID'></div></div>
+							<div> <div class = 'genre' id = '$id'></div></div>
 							<div class = 'row'>
 				    			<div class = 'col-md-3'>
 				    				<img class = 'tag-img' src = '$image'>
@@ -81,11 +63,13 @@
 				    		<br>
 			        		
 			        		<script>
-			        			var element = document.getElementById('$genreID');
+			        			var element = document.getElementById('$id');
 			        			element.className += ' genre-' + '$genre';
 			        			element.innerHTML += '$genreText'.toUpperCase(); 
 			        		</script>";
-					}
+				    }
+				    $stmt->close();
+
 				}?> </div> <!--end col-md-9 -->
 				<div class = "col-md-3">
 					<?php require 'get-recent.php'; ?>
@@ -99,13 +83,11 @@
 				<?php 
 
 				
-				mysqli_close($this->connection);
-		}
+				$conn->close();
+		
 
-	}
+	
 
-	$tag_articles = new tag_articles();
-	$data = array();	
-	$tag_articles -> find_articles();
+	
 		
 ?>

@@ -1,16 +1,13 @@
 <?php
-	require_once 'connection.php';
+	require "config.php";
+	$conn = new mysqli(hostname, username, password, db_name) or die ("could not connect to mysql");
 
-	function echo_stuff($array, $x) {
-		if($x < sizeof($array)) {
-			$id = $array[$x][0];
-			$title = stripslashes($array[$x][1]);
-			$author = stripslashes($array[$x][2]);
-			$date = $array[$x][3];
-			$text = stripslashes($array[$x][4]);
-			$image = $array[$x][5];
-			$genre= $array[$x][6];
-			$tags = stripslashes($array[$x][7]);
+	function echo_stuff($id, $title, $author, $date, $text, $image, $genre, $tags) {
+		
+			$title = stripslashes($title);
+			$author = stripslashes($author);
+			$text = stripslashes($text);
+			$tags = stripslashes($tags);
 			$genreID = 'genre'.$id;
 
 			$string = strip_tags($text);
@@ -26,7 +23,9 @@
 			$tags = str_replace(' ', '', $tags);
 			$tagArray = explode(',', $tags);
 
-			echo " <div class = 'panel panel-default'> <div class = 'panel-body'>
+
+
+			$returnString = " <div class = 'panel panel-default'> <div class = 'panel-body'>
 										    			
 						<img class = 'tag-img' src = '$image'>
 						<a href = 'article.php?id=$id'><h3>$title</h3></a>
@@ -36,26 +35,22 @@
 
 
 					    foreach($tagArray as $tag) {
-					    	echo "<a href = 'tags.php?tag=$tag'><span>$tag</span></a>	";
+					    	$returnString.= "<a href = 'tags.php?tag=$tag'><span>$tag</span></a>	";
 					    }
 
-					    echo "</p>
+					    $returnString.= "</p>
 					    	</div></div>
 					    <br>";
-			}
+			
+
+			return $returnString;
 	}
 
-	function echo_breaking_news($array, $x) {
-		if($x < sizeof($array)) {
-			$id = $array[$x][0];
-			$title = stripslashes($array[$x][1]);
-			$author = stripslashes($array[$x][2]);
-			$date = $array[$x][3];
-			$text = stripslashes($array[$x][4]);
-			$image = $array[$x][5];
-			$genre= $array[$x][6];
-			$tags = stripslashes($array[$x][7]);
-			$genreID = 'genre'.$id;
+	function echo_breaking_news($count, $id, $title, $author, $date, $text, $image, $genre, $tags) {
+			$title = stripslashes($title);
+			$author = stripslashes($author);
+			$text = stripslashes($text);
+			$tags = stripslashes($tags);
 
 			$string = strip_tags($text);
 			if (strlen($string) > 100) {
@@ -70,7 +65,7 @@
 			$tags = str_replace(' ', '', $tags);
 			$tagArray = explode(',', $tags);
 
-			if($x==0) {
+			if($count==0) {
 				echo "<div class = 'inner'>
 						<img class = 'big-tag-img' src = '$image'>
 								<a href = 'article.php?id=$id'><h1 style = 'text-align: center'><b>$title</b></h1></a>
@@ -83,35 +78,101 @@
 							<a href = 'article.php?id=$id'><h3 style = 'text-align: center'><b>$title</b></h3></a>
 				    	</div>
 					    <br>";
-		}
+		
 	}
 
-	function print_col_45($array, $length, $start) {
-		for($x = $start; $x < $length; $x+=2) {
-			echo_stuff($array, $x);			
-		}	
-	}
 
-	class genre_articles {
 
-		private $db;
-		private $connection;
+							
 
-		function __construct(){
-			$this->db = new DB_Connection();
-			$this->connection = $this->db->get_connection();
-		}
+				
 
-		public function find_articles(){ ?>							
+				$sql = "SELECT id, title, author, date, text, image, genre, tags FROM articles WHERE genre = ? ORDER BY date DESC";
+				if($stmt = $conn->prepare($sql)) { // assuming $conn is the connection
+			   		$stmt->bind_param('s', $genre);
+			   		$genre = $_SESSION['genre'];
+				    $stmt->execute();
+				    $stmt->store_result();
+				    $length = $stmt->num_rows;
+				    $stmt->bind_result($id, $title, $author, $date, $text, $image, $genre, $tags);
+				    $count = 0;
+				   
+				    	$leftColumn = "";
+				    	$rightColumn = "";
+				    	
+				    	while($stmt->fetch()) {
+				    		if($count==0) {
+				    		?>
 
-		<?php
+						    	<div class = "row">
+								<div class = "col-md-8">
+									<div class = "outer">
+										<div class = "middle">
+											<?php echo_breaking_news($count, $id, $title, $author, $date, $text, $image, $genre, $tags); ?>
+										</div>
+									</div>
+								</div> <!-- end col-md-8 -->
+				    <?php
+				    		}
+				    		if($count==1) {
+				    		?>
+				    			<div class = "col-md-4">
+				    				<?php echo_breaking_news($count, $id, $title, $author, $date, $text, $image, $genre, $tags); ?>
+				    		<?php
+				    		}
+
+				    		if($count==2) {
+				    		?>
+				    			<?php echo_breaking_news($count, $id, $title, $author, $date, $text, $image, $genre, $tags); ?>
+				    			</div> <!-- end col-md-4 -->
+				    			</div> <!-- end row -->
+				    			<hr>
+				    		<?php
+				    		}
+
+				    		if($count > 2 && fmod($count, 2) ==1) { $leftColumn.=echo_stuff($id, $title, $author, $date, $text, $image, $genre, $tags); }
+				    		else if ($count > 2 && fmod($count, 2) ==0) { $rightColumn.=echo_stuff($id, $title, $author, $date, $text, $image, $genre, $tags);}
+
+				    		$count = $count + 1;
+						}
+						?>
+							<div class = "row">
+							<div class = "col-md-9">
+								<div class = "row">
+									<div class = "col-md-6">
+										<?php echo $leftColumn;?>
+									</div>
+									<div class = "col-md-6">
+										<?php echo $rightColumn; ?>
+									</div>
+								</div>
+							</div>
+							<div class = "article-sidebar col-md-3">
+									<?php require 'get-recent.php'; ?>
+
+						    		<?php require 'tag-list.php'; ?>
+						    		<a class="twitter-timeline" data-height="500" data-theme="light" href="https://twitter.com/TwoViewsPress">Tweets by TwoViewsPress</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+					    		</div> <!-- end col-md-3 -->
+					    	</div> <!-- end row -->
+						<?php
+				     $stmt->close();
+
+				   
+			}
+				
+
+				$conn->close();
+
+				/****************************************/
 			
-				$genre = $_SESSION['genre'];
+			/*	$genre = $_SESSION['genre'];
 				$query = "Select * from articles WHERE genre LIKE '".$genre."' ORDER BY date DESC";
 				$result = mysqli_query($this->connection, $query);
 
 				if(mysqli_num_rows($result)==0){
-					$data = array('empty' => 'No results found.');
+					echo "No results found.";
 							//$json['empty'] = 'No results found.';
 				}else{ 
 					$length = mysqli_num_rows($result);
@@ -143,7 +204,7 @@
 						$start = array(0,1);
 					}//end if, else there are more than 3 articles
 
-				?>
+				?> 
 			<div class = "row">
 				<div class = "col-md-9">
 					<div class = "row">
@@ -173,13 +234,9 @@
 	    	</div> <!-- end row -->
 				<?php 
 
-				mysqli_close($this->connection);
-		}
+				mysqli_close($this->connection);  */
+		
 
-	}
-
-	$genre_articles = new genre_articles();
-	$data = array();	
-	$genre_articles -> find_articles();
+	
 		
 ?>
