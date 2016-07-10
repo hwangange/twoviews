@@ -47,7 +47,7 @@
 	    if(!is_uploaded_file($_FILES['image']['tmp_name'])) {
 	    	 $sql = "UPDATE articles SET author = ?, date = CAST(? AS DATE), title = ?, genre = ?, tags = ?, text = ? WHERE id = ?";
 		    if($stmt = $conn->prepare($sql)) {
-		    	$stmt->bind_param('ssssssi', $author, $date, $title, $genre, $tags, $text, $id);
+		    	$stmt->bind_param('sssssss', $author, $date, $title, $genre, $tags, $text, $id);
 		    	$author = $_POST['name'];
 		    	$date = strval($_POST['date']);
 		    	$title = $_POST['title'];
@@ -67,7 +67,7 @@
 	    } else {
 	    	 $sql = "UPDATE articles SET author = ?, date = CAST(? AS DATE), title = ?, genre = ?, tags = ?, text = ?, image = ? WHERE id = ?";
 		    if($stmt = $conn->prepare($sql)) {
-		    	$stmt->bind_param('sssssssi', $author, $date, $title, $genre, $tags, $text, $image, $id);
+		    	$stmt->bind_param('ssssssss', $author, $date, $title, $genre, $tags, $text, $image, $id);
 		    	$author = $_POST['name'];
 		    	$date = strval($_POST['date']);
 		    	$title = $_POST['title'];
