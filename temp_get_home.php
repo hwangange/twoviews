@@ -22,10 +22,10 @@
 	}
 
 	function vertical_column($news) {
-		$id = $news[0]['id'];
-		$title = stripslashes($news[0]['title']);
-		$image = $news[0]['image'];
-		$string = truncate(stripslashes($news[0]['text']), 50, $id);
+		$id = $news[0][0];
+		$title = stripslashes($news[0][1]);
+		$image = $news[0][5];
+		$string = truncate(stripslashes($news[0][4]), 50, $id);
 	?>
 
 		<ul class = 'list-group'>
@@ -52,6 +52,87 @@
 	}
 
 	?>
+
+<?php
+class iimysqli_result
+{
+    public $stmt, $nCols;
+}    
+
+function new_get_result($stmt)
+{
+    /**    EXPLANATION:
+     * We are creating a fake "result" structure to enable us to have
+     * source-level equivalent syntax to a query executed via
+     * mysqli_query().
+     *
+     *    $stmt = mysqli_prepare($conn, "");
+     *    mysqli_bind_param($stmt, "types", ...);
+     *
+     *    $param1 = 0;
+     *    $param2 = 'foo';
+     *    $param3 = 'bar';
+     *    mysqli_execute($stmt);
+     *    $result _mysqli_stmt_get_result($stmt);
+     *        [ $arr = _mysqli_result_fetch_array($result);
+     *            || $assoc = _mysqli_result_fetch_assoc($result); ]
+     *    mysqli_stmt_close($stmt);
+     *    mysqli_close($conn);
+     *
+     * At the source level, there is no difference between this and mysqlnd.
+     **/
+    $metadata = $stmt->result_metadata();
+    $ret = new iimysqli_result;
+    if (!$ret) return NULL;
+
+    $ret->nCols = $metadata->field_count;
+    $ret->stmt = $stmt;
+
+    $metadata->free();
+    return $ret;
+}
+
+/*function old_fetch_array(&$result)
+{
+    $ret = array();
+    $code = "return \$result->bind_result(";
+    for ($i=0; $i<$result->nCols; $i++)
+    {
+        $ret[$i] = NULL;
+        if($i==0) { $code .= "\$ret['" .$i ."']"; }
+        else { $code .= ", \$ret['" .$i ."']"; }
+    };
+    $code.=")";
+
+    if (!eval($code)) { return NULL; };
+
+    // This should advance the "$stmt" cursor.
+    if (!($result->stmt)->fetch()) { return NULL; }
+
+    // Return the array we built.
+    return $ret;
+} */
+
+function new_fetch_array(&$result) {
+	$ret = array();
+    $code = "return mysqli_stmt_bind_result(\$result->stmt ";
+
+    for ($i=0; $i<$result->nCols; $i++)
+    {
+        $ret[$i] = NULL;
+        $code .= ", \$ret['" .$i ."']";
+    };
+
+    $code .= ");";
+    if (!eval($code)) { return NULL; };
+
+    // This should advance the "$stmt" cursor.
+    if (!mysqli_stmt_fetch($result->stmt)) { return NULL; };
+
+    // Return the array we built.
+    return $ret;
+}
+?>
 			<div id="myCarousel" class="carousel slide hero-spacer" data-ride="carousel">
 			  <!-- Indicators -->
 			  <ol class="list-group col-sm-4">
@@ -194,11 +275,11 @@
 						        				$sql = "Select * from articles WHERE breaking = '0' AND genre = 'edit' ORDER BY date DESC LIMIT 4";
 						        				if($stmt = $conn->prepare($sql)) {
 													$stmt->execute();
-												    $result = $stmt->get_result();
-													while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+												    $result = new_get_result($stmt);
+													while ($row = new_fetch_array($result)) {
 													  
 													    $news[] = $row;
-													    $data[] = $row["id"];  
+													    $data[] = $row[0];  
 													  	
 													}
 
@@ -224,12 +305,12 @@
 				        						$sql = "Select * from articles WHERE breaking = '0' AND top = '1' ORDER BY id DESC LIMIT 1";
 				        						if($stmt = $conn->prepare($sql)) {
 													$stmt->execute();
-												    $result = $stmt->get_result();
-													while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-														$id = $row['id'];
-														$title = stripslashes($row['title']);
-														$text = stripslashes($row['text']);
-														$image = $row['image'];
+													$result = new_get_result($stmt);
+													while ($row = new_fetch_array($result)) {									  		
+														$id = $row[0];
+														$title = stripslashes($row[1]);
+														$text = stripslashes($row[4]);
+														$image = $row[5];
 														$string = truncate($text, 150, $id);
 													
 														echo "
@@ -254,10 +335,12 @@
 												$news = array();
 												if($stmt = $conn->prepare($sql)) {
 													$stmt->execute();
-												    $result = $stmt->get_result();
-													while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-														$news[] = $row;
-														$data[] = $row['id'];
+												    $result = new_get_result($stmt);
+													while ($row = new_fetch_array($result)) {
+													  
+													    $news[] = $row;
+													    $data[] = $row[0];  
+													  	
 													}
 												}			
 					        				?>
@@ -276,10 +359,12 @@
 												$news = array();
 												if($stmt = $conn->prepare($sql)) {
 													$stmt->execute();
-												    $result = $stmt->get_result();
-													while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-														$news[] = $row;
-														$data[] = $row['id'];
+												   $result = new_get_result($stmt);
+													while ($row = new_fetch_array($result)) {
+													  
+													    $news[] = $row;
+													    $data[] = $row[0];  
+													  	
 													}
 												}
 					        					?>
@@ -301,18 +386,20 @@
 													$news = array();
 													if($stmt = $conn->prepare($sql)) {
 														$stmt->execute();
-													    $result = $stmt->get_result();
-														while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-															$news[] = $row;
-															$data[] = $row['id'];
+													    $result = new_get_result($stmt);
+														while ($row = new_fetch_array($result)) {
+														  
+														    $news[] = $row;
+														    $data[] = $row[0];  
+														  	
 														}
 													}
 						        			
 
-														$id = $news[0]['id'];
-														$title = stripslashes($news[0]['title']);
-														$image = $news[0]['image'];
-														$string = truncate(stripslashes($news[0]['text']), 50, $id);
+														$id = $news[0][0];
+														$title = stripslashes($news[0][1]);
+														$image = $news[0][5];
+														$string = truncate(stripslashes($news[0][4]), 50, $id);
 						        					?>
 					        						<div class = "tech-news-home">
 					        							<h3>Tech & Sciences</h3>
@@ -342,17 +429,18 @@
 													$news = array();
 													if($stmt = $conn->prepare($sql)) {
 														$stmt->execute();
-													    $result = $stmt->get_result();
-														while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+
+														$result = new_get_result($stmt);
+														while ($row = new_fetch_array($result)) {
 															$news[] = $row;
-															$data[] = $row['id'];
+															$data[] = $row[0];
 														}
 													}
 
-														$id = $news[0]['id'];
-														$title = stripslashes($news[0]['title']);
-														$image = $news[0]['image'];
-														$string = truncate(stripslashes($news[0]['text']), 50, $id);
+														$id = $news[0][0];
+														$title = stripslashes($news[0][1]);
+														$image = $news[0][5];
+														$string = truncate(stripslashes($news[0][4]), 50, $id);
 						        					?>
 
 					        						<div class = "ent-news-home">
@@ -389,9 +477,10 @@
 											$news = array();
 											if($stmt = $conn->prepare($sql)) {
 												$stmt->execute();
-											    $result = $stmt->get_result();
-												while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-													$staff_pick_html = display_media($row['id'], $row['title'], $row['image'], $row['date']);
+											   
+												$result = new_get_result($stmt);
+												while ($row = new_fetch_array($result)) {
+													$staff_pick_html = display_media($row[0], $row[1], $row[5], $row[3]);
 													echo $staff_pick_html;
 												}
 											}
@@ -405,10 +494,10 @@
 											$news = array();
 											if($stmt = $conn->prepare($sql)) {
 												$stmt->execute();
-											    $result = $stmt->get_result();
-												while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+											    $result = new_get_result($stmt);
+												while ($row = new_fetch_array($result)) {
 													$news[] = $row;
-													$data[] = $row['id'];
+													$data[] = $row[0];
 												}
 											}
 
@@ -425,10 +514,10 @@
 													$news = array();
 													if($stmt = $conn->prepare($sql)) {
 														$stmt->execute();
-													    $result = $stmt->get_result();
-														while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+													    $result = new_get_result($stmt);
+														while ($row = new_fetch_array($result)) {
 															$news[] = $row;
-															$data[] = $row['id'];
+															$data[] = $row[0];
 														}
 													}
 					        				?>
@@ -465,10 +554,10 @@
 				$latestHtml = "";
 				if($stmt = $conn->prepare($sql)) {
 					$stmt->execute();
-					$result = $stmt->get_result();
-					while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+					$result = new_get_result($stmt);
+					while ($row = new_fetch_array($result)) {
 						$news[] = $row;
-						$latestHtml.=display_media($row['id'], $row['title'], $row['image'], $row['date']);
+						$latestHtml.=display_media($row[0], $row[1], $row[5], $row[3]);
 					}
 				}		
 				

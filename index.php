@@ -15,7 +15,7 @@
 	    	
 			    
 
-	        <?php require 'get-home-articles.php'; ?>
+	        <?php require 'temp_get_home.php'; ?>
 
 		
 	    </div>
