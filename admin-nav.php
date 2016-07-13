@@ -17,6 +17,7 @@
       	<li><a href="admin.php">Home</a></li>
         <li><a href="admin-convert.php">Post</a></li>
         <li><a href="admin-my-articles.php">My Articles</a></li>
+        <li><a href = "admin-choose.php">Choose Top News/Staff's Picks</a></li>
         <li><a href="admin-profile.php">Profile</a></li>
         <li><a href="admin-logout.php">Log Out</a></li>
       </ul>

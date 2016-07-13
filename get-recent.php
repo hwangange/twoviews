@@ -15,7 +15,7 @@
 			$stmt->store_result();
 			$stmt->bind_result($id, $title, $image, $date);
 			while($stmt->fetch()) {
-				$recent_html = display_media($id, $title, $image, $date);
+				$recent_html = display_media($id, stripslashes($title), $image, $date);
 				echo $recent_html;
 			}
 			
@@ -29,6 +29,7 @@
 			$stmt->store_result();
 			$stmt->bind_result($id, $title, $image, $date);
 			while($stmt->fetch()) {
+				$title = stripslashes($title);
 				echo "<div class = 'media'>
 							<div class = 'media-left'>			
 								<a href='article.php?id=".$id."'><img class = 'media-object' src = '$image'></a>

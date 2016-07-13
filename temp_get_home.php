@@ -184,6 +184,7 @@ function new_fetch_array(&$result) {
 				        $data[] = $id;
 
 				    }
+				    $stmt->close();
 				}
 ?>
 					</div><!-- end carousel-inner-->
@@ -249,6 +250,7 @@ function new_fetch_array(&$result) {
 					        
 					        
 					       }
+					       $stmt->close();
 					      }
 					      $count = $count + 1;
 				}
@@ -282,6 +284,7 @@ function new_fetch_array(&$result) {
 													    $data[] = $row[0];  
 													  	
 													}
+													$stmt->close();
 
 												}			
 						        			?>
@@ -296,13 +299,35 @@ function new_fetch_array(&$result) {
 												<noscript><a href="http://polldaddy.com/poll/9451823/">Who will win the 2016 U.S. presidential election?</a></noscript>
 											</div>
 
+											<?php 
+												$news = array();
+						        				$sql = "Select * from articles WHERE breaking = '0' AND genre = 'viral' ORDER BY date DESC LIMIT 4";
+						        				if($stmt = $conn->prepare($sql)) {
+													$stmt->execute();
+												    $result = new_get_result($stmt);
+													while ($row = new_fetch_array($result)) {
+													  
+													    $news[] = $row;
+													    $data[] = $row[0];  
+													  	
+													}
+													$stmt->close();
+
+												}			
+						        			?>
+						        				
+						        			<div class = "viral-news-home">
+						        				<h3>Viral</h3>
+							        			<?php vertical_column($news);?>
+						        			</div>
+
 					        										        				
 				        				</div>
 				        				<div class = "col-md-6 col-xs-12 top-pad big-pad">
 				        					<h3>Top News</h3>
 
 				        					<?php
-				        						$sql = "Select * from articles WHERE breaking = '0' AND top = '1' ORDER BY id DESC LIMIT 1";
+				        						$sql = "Select * from articles WHERE breaking = '0' AND top = '1' ORDER BY date DESC LIMIT 1";
 				        						if($stmt = $conn->prepare($sql)) {
 													$stmt->execute();
 													$result = new_get_result($stmt);
@@ -324,13 +349,14 @@ function new_fetch_array(&$result) {
 														$data[] = $id;
 
 													}
+													$stmt->close();
 												}
 				        					?>
 				        		
 					        				<hr>
 
 					        				<?php 
-					        					$sql = "Select * from articles WHERE breaking = '0' AND genre = 'us' ORDER BY id DESC LIMIT 4";
+					        					$sql = "Select * from articles WHERE breaking = '0' AND genre = 'us' ORDER BY date DESC LIMIT 4";
 												
 												$news = array();
 												if($stmt = $conn->prepare($sql)) {
@@ -342,6 +368,8 @@ function new_fetch_array(&$result) {
 													    $data[] = $row[0];  
 													  	
 													}
+
+													$stmt->close();
 												}			
 					        				?>
 
@@ -354,7 +382,7 @@ function new_fetch_array(&$result) {
 					        					</div>
 
 					        					<?php 
-					        					$sql = "Select * from articles WHERE breaking = '0' AND genre = 'international' ORDER BY id DESC LIMIT 4";
+					        					$sql = "Select * from articles WHERE breaking = '0' AND genre = 'international' ORDER BY date DESC LIMIT 4";
 												
 												$news = array();
 												if($stmt = $conn->prepare($sql)) {
@@ -366,6 +394,8 @@ function new_fetch_array(&$result) {
 													    $data[] = $row[0];  
 													  	
 													}
+
+													$stmt->close();
 												}
 					        					?>
 
@@ -381,7 +411,7 @@ function new_fetch_array(&$result) {
 					        					<div class = "col-md-12">
 
 						        					<?php 
-						        					$sql = "Select * from articles WHERE breaking = '0' AND genre = 'science' ORDER BY id DESC LIMIT 4";
+						        					$sql = "Select * from articles WHERE breaking = '0' AND genre = 'science' ORDER BY date DESC LIMIT 4";
 													unset($news);
 													$news = array();
 													if($stmt = $conn->prepare($sql)) {
@@ -393,6 +423,8 @@ function new_fetch_array(&$result) {
 														    $data[] = $row[0];  
 														  	
 														}
+
+														$stmt->close();
 													}
 						        			
 
@@ -424,7 +456,7 @@ function new_fetch_array(&$result) {
 					        					<div class = "col-md-12">
 					        						<?php 
 
-					        						$sql = "Select * from articles WHERE breaking = '0' AND genre = 'entertainment' ORDER BY id DESC LIMIT 4";
+					        						$sql = "Select * from articles WHERE breaking = '0' AND genre = 'entertainment' ORDER BY date DESC LIMIT 4";
 													unset($news);
 													$news = array();
 													if($stmt = $conn->prepare($sql)) {
@@ -435,6 +467,8 @@ function new_fetch_array(&$result) {
 															$news[] = $row;
 															$data[] = $row[0];
 														}
+
+														$stmt->close();
 													}
 
 														$id = $news[0][0];
@@ -480,16 +514,18 @@ function new_fetch_array(&$result) {
 											   
 												$result = new_get_result($stmt);
 												while ($row = new_fetch_array($result)) {
-													$staff_pick_html = display_media($row[0], $row[1], $row[5], $row[3]);
+													$staff_pick_html = display_media($row[0], stripslashes($row[1]), $row[5], $row[3]);
 													echo $staff_pick_html;
 												}
+
+												$stmt->close();
 											}
 				        					?>
 				        						</div>
 											</div>
 				        					<?php 
 
-				        					$sql = "Select * from articles WHERE breaking = '0' AND genre = 'school' ORDER BY id DESC LIMIT 4";							
+				        					$sql = "Select * from articles WHERE breaking = '0' AND genre = 'school' ORDER BY date DESC LIMIT 4";							
 				        					unset($news);
 											$news = array();
 											if($stmt = $conn->prepare($sql)) {
@@ -499,6 +535,8 @@ function new_fetch_array(&$result) {
 													$news[] = $row;
 													$data[] = $row[0];
 												}
+
+												$stmt->close();
 											}
 
 					        				?>
@@ -509,7 +547,7 @@ function new_fetch_array(&$result) {
 					        				</div>
 
 					        				<?php 
-					   								$sql = "Select * from articles WHERE breaking = '0' AND genre = 'life' ORDER BY id DESC LIMIT 4";
+					   								$sql = "Select * from articles WHERE breaking = '0' AND genre = 'life' ORDER BY date DESC LIMIT 4";
 													unset($news);
 													$news = array();
 													if($stmt = $conn->prepare($sql)) {
@@ -519,6 +557,8 @@ function new_fetch_array(&$result) {
 															$news[] = $row;
 															$data[] = $row[0];
 														}
+
+														$stmt->close();
 													}
 					        				?>
         					
@@ -549,7 +589,7 @@ function new_fetch_array(&$result) {
 					}
 				}
 
-				$sql = $sql . ") ORDER BY id DESC LIMIT 10";
+				$sql = $sql . ") ORDER BY date DESC LIMIT 10";
 
 				$latestHtml = "";
 				if($stmt = $conn->prepare($sql)) {
@@ -557,8 +597,10 @@ function new_fetch_array(&$result) {
 					$result = new_get_result($stmt);
 					while ($row = new_fetch_array($result)) {
 						$news[] = $row;
-						$latestHtml.=display_media($row[0], $row[1], $row[5], $row[3]);
-					}
+						$latestHtml.=display_media($row[0], stripslashes($row[1]), $row[5], $row[3]); //id, title, image, date
+					} 
+
+					$stmt->close();
 				}		
 				
 				?>

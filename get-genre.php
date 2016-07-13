@@ -93,8 +93,10 @@
 			   		$genre = $_SESSION['genre'];
 				    $stmt->execute();
 				    $stmt->store_result();
-				    $length = $stmt->num_rows;
+				    
 				    $stmt->bind_result($id, $title, $author, $date, $text, $image, $genre, $tags);
+				    $length = $stmt->num_rows;
+
 				    $count = 0;
 				   
 				    	$leftColumn = "";
@@ -124,9 +126,15 @@
 				    		if($count==2) {
 				    		?>
 				    			<?php echo_breaking_news($count, $id, $title, $author, $date, $text, $image, $genre, $tags); ?>
+				    			
+				    		<?php
+				    		}
+
+				    		if($count==2 || ($count==1 && $count==$length-1)) {
+				    		?>
 				    			</div> <!-- end col-md-4 -->
 				    			</div> <!-- end row -->
-				    			<hr>
+				    			
 				    		<?php
 				    		}
 
@@ -135,7 +143,10 @@
 
 				    		$count = $count + 1;
 						}
+
+						if($length > 3) {
 						?>
+							<hr>
 							<div class = "row">
 							<div class = "col-md-9">
 								<div class = "row">
@@ -157,6 +168,7 @@
 					    		</div> <!-- end col-md-3 -->
 					    	</div> <!-- end row -->
 						<?php
+					}
 				     $stmt->close();
 
 				   

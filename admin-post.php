@@ -35,7 +35,7 @@
 
 		$sql = "INSERT INTO articles(id, title, author, date, text, image, genre, tags, breaking, staff, top) VALUES (?, ?, ?, CAST(? AS DATE), ?, ?, ?, ?, ?, ?, ?)";
 		if($stmt = $conn->prepare($sql)) { // assuming $conn is the connection
-		    $stmt->bind_param('isssssssiii', $id, $title, $author, $date, $text, $image, $genre, $tags, $breaking, $staff, $top);
+		    $stmt->bind_param('ssssssssiii', $id, $title, $author, $date, $text, $image, $genre, $tags, $breaking, $staff, $top);
 
 		    $id = random_str();
 		    $title = $_POST['title'];
