@@ -5,7 +5,7 @@
 	
 			?>
 			<div class = "row hero-spacer">
-	    		<div class = "col-md-9">
+	    		<div class = "col-md-9 article-padding">
 			<?php
 
 				$sql = "SELECT title, author, date, text, image, genre, tags FROM articles WHERE id = ?";

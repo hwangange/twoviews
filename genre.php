@@ -59,4 +59,19 @@
 	    <!-- /.container -->
 	    <?php require "footer.php"; ?>
 	</body>
+	<script>
+	   $(window).load(function() {
+
+	    	
+		/*	$height = $("#parent-tobe").height();
+   			$("#parent-tobe").css({'height': $height});
+
+   			$height = $("#children-tobe").height();
+   			$("#children-tobe").css({'height': $height});
+
+   			$("#parent-tobe").addClass("parent");
+
+			$("#children-tobe").addClass("children"); 
+		}); */
+	</script> 
 </html>

@@ -1,7 +1,7 @@
 
-    <nav class="navbar navbar-blue navbar-static-top" role="navigation">
+    <nav class="navbar navbar-blue navbar-static-top navbar-sm" role="navigation">
      <!--   <div class = "container-fluid" style = "background-color: white" id = "header-top">
-            <a href = "index.php"><img style = "display: block; margin-left: auto; margin-right: auto; height: 100px; width: auto" src = "img/logo-horizontal.jpg"></a>
+            <a href = "index.php"><img id = "header-logo" style = "display: block; margin-left: auto; margin-right: auto; height: 100px; width: auto" src = "img/logo-horizontal.jpg"></a>
         </div> -->
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -15,7 +15,7 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse collapse" id="myNav" aria-expanded = "false">
-                <ul class="nav navbar-nav">                            
+                <ul class="nav navbar-nav center-nav">                            
                     <li class = "dropdown">
                             <a class = "dropdown-toggle" data-toggle = "dropdown" href = "#">News<b class = "caret"></b></a>
                                 <ul class = "dropdown-menu" role = "menu" aria-labelledby="dLabel">

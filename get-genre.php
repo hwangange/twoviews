@@ -66,7 +66,7 @@
 			$tagArray = explode(',', $tags);
 
 			if($count==0) {
-				echo "<div class = 'inner'>
+				echo "<div class = 'inner' id = 'children-tobe'>
 						<img class = 'big-tag-img' src = '$image'>
 								<a href = 'article.php?id=$id'><h1 style = 'text-align: center'><b>$title</b></h1></a>
 				    </div>
@@ -107,12 +107,10 @@
 				    		?>
 
 						    	<div class = "row">
-								<div class = "col-md-8">
-									<div class = "outer">
-										<div class = "middle">
+								<div class = "col-md-8" id = "parent-tobe">
+									
 											<?php echo_breaking_news($count, $id, $title, $author, $date, $text, $image, $genre, $tags); ?>
-										</div>
-									</div>
+										
 								</div> <!-- end col-md-8 -->
 				    <?php
 				    		}
