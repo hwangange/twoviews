@@ -1,22 +1,24 @@
 
-    <nav class="navbar navbar-blue navbar-static-top" role="navigation">
-     <!--   <div class = "container-fluid" style = "background-color: white" id = "header-top">
+    <nav class="navbar navbar-blue navbar-fixed-top" role="navigation">
+        <div class = "container-fluid" style = "background-color: white" id = "header-top">
             <a href = "index.php"><img style = "display: block; margin-left: auto; margin-right: auto; height: 100px; width: auto" src = "img/logo-horizontal.jpg"></a>
-        </div> -->
+        </div>
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNav" aria-expanded="false" aria-controls = "navbar">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNav" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>    
+                </button>
+                <a class="navbar-brand" href="index.php">Two Views</a> 
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="navbar-collapse collapse" id="myNav" aria-expanded = "false">
-                <ul class="nav navbar-nav">                            
+            <div class="collapse navbar-collapse" id="myNav">
+                <ul class="nav navbar-nav">
                     <li class = "dropdown">
+                        
                             <a class = "dropdown-toggle" data-toggle = "dropdown" href = "#">News<b class = "caret"></b></a>
                                 <ul class = "dropdown-menu" role = "menu" aria-labelledby="dLabel">
                                     <li><a href = "genre.php?genre=United States">United States</a></li>

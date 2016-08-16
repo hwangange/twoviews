@@ -80,6 +80,7 @@
 	<?php require "admin-nav.php";?>
 	<div class = "container" style = "margin-top: 50px">
 		<h1>Edit an Article</h1>
+		<h4><strong>NOTE: </strong>DO NOT WORRY if the article information displayed on the screen does NOT match the article you intended to pull up. If this happens to you, you'll have to fill in all the information in the form again. Sorry. DO NOT PRESS THE BACK BUTTON, SUBMIT BUTTON, CANCEL BUTTON, ANY LINK ON THE NAV BAR, OR ANY LINK THAT WILL REDIRECT YOU AWAY FROM THIS PAGE FOR THAT MATTER. Sorry again.</h4>
 		<form name = "articleForm" id = "articleForm" method = "post" action = "admin-update.php?id=<?php echo $_GET['id'];?> " enctype = "multipart/form-data">
 	  		<div class = "row">
 		  		<div class="form-group col-md-6">
