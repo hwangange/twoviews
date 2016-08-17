@@ -46,7 +46,7 @@
 						?>
 							<div class = 'genre <?php echo $genreClass;?>'><?php echo $genreText; ?></div>
 							<h1><?php echo $title;?></h1>
-	    					<p><span><?php echo $author; ?></span><span>	|	</span><span><?php echo $date; ?></span></p>
+	    					<p><a href = "author.php?author=<?php echo $author; ?>"><span><?php echo $author; ?></span></a><span>	|	</span><span><?php echo $date; ?></span></p>
 	    					<br>
 
 		    			<?php	if(substr($image, 0, 3) == 'img') {

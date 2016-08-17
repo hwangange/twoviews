@@ -374,6 +374,10 @@ body { /*padding-top: 50px;*/ }
 
 /*************NAVBAR ***************/
 
+#searchLink:hover {
+	cursor: pointer;
+}
+
 @media screen and (min-width: 768px){
     .center-nav{
         float: none;

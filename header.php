@@ -1,8 +1,8 @@
 
     <nav class="navbar navbar-blue navbar-static-top navbar-sm" role="navigation">
-     <!--   <div class = "container-fluid" style = "background-color: white" id = "header-top">
+        <div class = "container-fluid" style = "background-color: white" id = "header-top">
             <a href = "index.php"><img id = "header-logo" style = "display: block; margin-left: auto; margin-right: auto; height: 100px; width: auto" src = "img/logo-horizontal.jpg"></a>
-        </div> -->
+        </div>
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -47,6 +47,9 @@
                                     <li><a href = "contact.php">Contact Us</a></li>
                                 </ul>
                     </li>
+                    <li><a data-toggle = 'modal' data-target = '#searchModal' id = "searchLink"><i class="fa fa-search"></i></a>
+                        
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -55,3 +58,21 @@
     </nav>
 
         <!-- Navigation -->
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+       <div class="modal-dialog" role="document">
+         <div class="modal-content">
+           <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h3 class="modal-title" id="myModalLabel">Search</h3>
+           </div>
+           <div class="modal-body">
+            <iframe src = "search.html" style = "width: 100%; height: 50vh">
+                
+            </iframe>
+              
+           </div>
+            
+          </div>
+         </div>
+      </div>
