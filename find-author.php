@@ -48,12 +48,11 @@
 				    			<div class = 'col-md-3'>
 				    				<img class = 'tag-img' src = '$image'>
 				    			</div>
-				    			<div class = 'col-md-9 tag-text'>
-				    				<a href = 'article.php?id=$id'><h3>$title</h3></a>
+				    			<div class = 'col-md-9 tag-text' >
+				    				<a href = 'article.php?id=$id'><h3 style = 'margin-top: 0'>$title</h3></a>
 				    				<p><span>$author</span><span>	|	</span><span>$date</span></p>
 				    				<p>$string</p>
-				    			</div>
-				    		</div>
+				    			
 				    		<div><span>Tags: </span>";
 
 
@@ -62,6 +61,8 @@
 				    			}
 
 				    			echo "</div>
+				    			</div>
+				    		</div>
 				    		<br>
 			        		
 			        		<script>
